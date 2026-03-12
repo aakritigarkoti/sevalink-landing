@@ -56,7 +56,7 @@ export const Header = () => {
                 key={item.name}
                 href={item.href}
                 className={`relative px-5 py-2 text-sm font-medium transition-colors group ${
-                  pathname === item.href ? "text-red-600" : "text-gray-600 hover:text-gray-900"
+                  pathname === item.href ? "text-red-600" : "text-gray-900 hover:text-black"
                 }`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -3,17 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Shield, Phone } from "lucide-react";
+import { Shield } from "lucide-react";
+import Aurora from "@/components/ui/Aurora";
 
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center" style={{ backgroundColor: "#FFF3E0" }}>
 
+      {/* Aurora Background */}
+      <Aurora
+  colorStops={["#DC2626", "#FF6B6B", "#FFF3E0"]}
+  amplitude={0.5}
+  blend={0.3}
+  speed={0.5}
+/>
+
       {/* Decorative blobs */}
       <div className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full blur-3xl" style={{ backgroundColor: "#FFCDD2", opacity: 0.3 }} />
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full blur-3xl" style={{ backgroundColor: "#FFCDD2", opacity: 0.2 }} />
 
-      <div className="relative mx-auto max-w-7xl px-4 lg:px-8 py-32 w-full">
+      <div className="relative mx-auto max-w-7xl px-4 lg:px-8 py-32 w-full" style={{ zIndex: 1 }}>
         <div className="flex flex-col lg:flex-row items-center gap-12">
 
           {/* Left Content */}
@@ -32,7 +41,7 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            {/* Heading with stagger animation */}
+            {/* Heading */}
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -50,8 +59,7 @@ export function HeroSection() {
                   <motion.span
                     whileHover={{ x: 8 }}
                     transition={{ duration: 0.2 }}
-                    className="inline-block cursor-default"
-                    style={{ color: i === 0 ? "#111827" : "#DC2626" }}
+                    className={`inline-block cursor-default ${i === 0 ? "text-gray-900" : "text-red-600"}`}
                   >
                     {line}
                   </motion.span>
@@ -72,90 +80,89 @@ export function HeroSection() {
             </motion.p>
 
             {/* Buttons */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.6 }}
-  className="flex flex-wrap gap-4 mb-10"
->
-  {/* Book Ambulance — Animated Button */}
-  <Link href="/book" className="animated-btn group">
-    <svg className="arr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
-    </svg>
-    <span className="btn-text">🚑 Book Ambulance</span>
-    <span className="btn-circle" />
-    <svg className="arr-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
-    </svg>
-  </Link>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-wrap gap-4 mb-10"
+            >
+              <Link href="/book" className="animated-btn group">
+                <svg className="arr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                </svg>
+                <span className="btn-text">🚑 Book Ambulance</span>
+                <span className="btn-circle" />
+                <svg className="arr-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                </svg>
+              </Link>
 
-  {/* Call 108 — Outlined */}
-  <Link href="tel:108"
-    className="flex items-center gap-2 px-8 py-4 border-2 border-red-600 text-red-600 hover:bg-red-50 font-semibold rounded-full transition-all hover:scale-105"
-  >
-    📞 Call 108
-  </Link>
-</motion.div>
+              <Link href="tel:108"
+                className="flex items-center gap-2 px-8 py-4 border-2 border-red-600 text-red-600 hover:bg-red-50 font-semibold rounded-full transition-all hover:scale-105"
+              >
+                📞 Call 108
+              </Link>
+            </motion.div>
 
-<style>{`
-  .animated-btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 16px 36px;
-    border: 4px solid transparent;
-    font-size: 16px;
-    background-color: #DC2626;
-    border-radius: 100px;
-    font-weight: 600;
-    color: white;
-    box-shadow: 0 0 0 2px #DC2626;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    text-decoration: none;
-  }
-  .animated-btn svg {
-    position: absolute;
-    width: 24px;
-    fill: white;
-    z-index: 9;
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .animated-btn .arr-1 { right: 16px; }
-  .animated-btn .arr-2 { left: -25%; }
-  .animated-btn .btn-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background-color: #b91c1c;
-    border-radius: 50%;
-    opacity: 0;
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .animated-btn .btn-text {
-    position: relative;
-    z-index: 1;
-    transform: translateX(-12px);
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .animated-btn:hover {
-    box-shadow: 0 0 0 12px transparent;
-    color: white;
-    border-radius: 12px;
-  }
-  .animated-btn:hover .arr-1 { right: -25%; }
-  .animated-btn:hover .arr-2 { left: 16px; }
-  .animated-btn:hover .btn-text { transform: translateX(12px); }
-  .animated-btn:hover svg { fill: white; }
-  .animated-btn:active { scale: 0.95; box-shadow: 0 0 0 4px #DC2626; }
-  .animated-btn:hover .btn-circle { width: 220px; height: 220px; opacity: 1; }
-`}</style>
+            <style>{`
+              .animated-btn {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                padding: 16px 36px;
+                border: 4px solid transparent;
+                font-size: 16px;
+                background-color: #DC2626;
+                border-radius: 100px;
+                font-weight: 600;
+                color: white;
+                box-shadow: 0 0 0 2px #DC2626;
+                cursor: pointer;
+                overflow: hidden;
+                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+                text-decoration: none;
+              }
+              .animated-btn svg {
+                position: absolute;
+                width: 24px;
+                fill: white;
+                z-index: 9;
+                transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+              }
+              .animated-btn .arr-1 { right: 16px; }
+              .animated-btn .arr-2 { left: -25%; }
+              .animated-btn .btn-circle {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 20px;
+                height: 20px;
+                background-color: #b91c1c;
+                border-radius: 50%;
+                opacity: 0;
+                transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+              }
+              .animated-btn .btn-text {
+                position: relative;
+                z-index: 1;
+                transform: translateX(-12px);
+                transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+              }
+              .animated-btn:hover {
+                box-shadow: 0 0 0 12px transparent;
+                color: white;
+                border-radius: 12px;
+              }
+              .animated-btn:hover .arr-1 { right: -25%; }
+              .animated-btn:hover .arr-2 { left: 16px; }
+              .animated-btn:hover .btn-text { transform: translateX(12px); }
+              .animated-btn:hover svg { fill: white; }
+              .animated-btn:active { scale: 0.95; box-shadow: 0 0 0 4px #DC2626; }
+              .animated-btn:hover .btn-circle { width: 220px; height: 220px; opacity: 1; }
+            `}</style>
+
             {/* Trust indicators */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -172,16 +179,14 @@ export function HeroSection() {
                 </div>
               ))}
             </motion.div>
-
           </div>
 
           {/* Right — Ambulance Image + Floating Cards */}
           <div className="flex-1 relative flex items-center justify-center min-h-[450px]">
 
-            {/* Cream background box */}
             <div className="absolute inset-4 rounded-3xl" style={{ backgroundColor: "#F5DEB3", opacity: 0.4 }} />
 
-            {/* Certified Paramedics Card — top right */}
+            {/* Certified Paramedics Card */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -195,7 +200,7 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Live BPM Card — top left */}
+            {/* Live BPM Card */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -218,7 +223,7 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Average Response Card — bottom */}
+            {/* Average Response Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -232,7 +237,7 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Ambulance Image — floating animation */}
+            {/* Ambulance Image */}
             <motion.div
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -247,7 +252,6 @@ export function HeroSection() {
                 priority
               />
             </motion.div>
-
           </div>
         </div>
       </div>
