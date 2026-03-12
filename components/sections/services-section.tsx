@@ -64,43 +64,39 @@ export default function ServicesSection() {
   return (
     <section
       ref={ref}
-      className="w-full py-20 px-4"
+      className="w-full py-20 px-4 overflow-hidden"
       style={{ backgroundColor: "#FFF3E0" }}
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto">
+        {/* Header - Animated like your original */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <span
-            className="inline-block text-xs font-bold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
-            style={{ color: "#DC2626", backgroundColor: "#DC262610" }}
-          >
+          <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase mb-4 px-5 py-2 rounded-full bg-red-600/10 text-red-600">
             Our Services
           </span>
-          <h2
-            className="text-4xl md:text-5xl font-black mb-4 leading-tight"
-            style={{ color: "#111827" }}
-          >
-            Everything You Need{" "}
-            <span style={{ color: "#DC2626" }}>in a Crisis</span>
+          <h2 className="text-4xl md:text-6xl font-black mb-6 text-gray-900 tracking-tight">
+            Everything You Need <span className="text-red-600 italic">in a Crisis</span>
           </h2>
-          <p className="text-base max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
             From dispatch to recovery — SevaLink covers every step of your emergency journey.
           </p>
         </motion.div>
 
-        {/* Cards Grid */}
-        <div className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Dynamic Grid - Fixes the layout issue */}
+        <div className="flex flex-col gap-6">
+          {/* Top Row: 4 Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.slice(0, 4).map((service, i) => (
               <ServiceCard key={i} service={service} index={i} inView={inView} />
             ))}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 lg:px-24">
+          
+          {/* Bottom Row: 3 Cards Centered on Desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:px-24">
             {services.slice(4).map((service, i) => (
               <ServiceCard key={i + 4} service={service} index={i + 4} inView={inView} />
             ))}
@@ -109,29 +105,27 @@ export default function ServicesSection() {
       </div>
 
       <style>{`
+        /* Original Advanced CSS Restored */
         .seva-card {
           position: relative;
-          min-height: 220px;
-          border-radius: 14px;
+          min-height: 240px;
+          border-radius: 24px;
           overflow: hidden;
           cursor: pointer;
-          background: #1f1f1f;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transition: box-shadow 0.4s ease, transform 0.3s ease;
+          background: #1a1a1a; /* Dark base for the neon glow effect */
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .seva-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 0 40px 12px rgba(220, 38, 38, 0.2), 0 0 80px 25px rgba(220, 38, 38, 0.08);
+          transform: translateY(-10px);
+          box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
         }
 
+        /* The Neon Border/Glow effect from your code */
         .seva-card::before {
           content: '';
           position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
+          inset: 0;
           background: linear-gradient(315deg, #DC2626, #FF6B6B);
           z-index: 0;
         }
@@ -139,129 +133,113 @@ export default function ServicesSection() {
         .seva-card::after {
           content: '';
           position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
+          inset: 0;
           background: linear-gradient(315deg, #DC2626, #FF6B6B);
-          filter: blur(40px);
-          opacity: 1.2;
+          filter: blur(35px);
+          opacity: 0;
+          transition: 0.4s;
           z-index: 0;
+        }
+
+        .seva-card:hover::after {
+          opacity: 0.8;
         }
 
         .seva-card-inner {
           position: absolute;
-          inset: 5px;
-          background: linear-gradient(135deg, #FFF3E0 0%, #FECACA 100%);
-          border-radius: 10px;
+          inset: 3px; /* Border thickness */
+          background: linear-gradient(135deg, #FFF3E0 0%, #FFE4E6 100%);
+          border-radius: 21px;
           z-index: 2;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          overflow: hidden;
-          padding: 20px;
+          padding: 24px;
+          transition: all 0.4s;
         }
 
+        /* Icon Animation Logic */
         .seva-card-icon {
           position: absolute;
           z-index: 3;
-          transition: 0.5s ease;
-          transform: scale(0.9);
-          opacity: 0.5;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 8px;
+          gap: 12px;
+          text-align: center;
         }
 
         .seva-card:hover .seva-card-icon {
-          transform: scale(0.7) translateY(-55px);
-          opacity: 1;
+          transform: translateY(-50px) scale(0.85);
         }
 
+        /* Description Reveal Logic */
         .seva-card-content {
           position: absolute;
           z-index: 3;
-          bottom: 0;
+          bottom: -20px;
+          opacity: 0;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding: 0 16px 0px;
-          transform: scale(0);
-          transition: 0.5s ease;
+          padding: 0 20px;
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .seva-card:hover .seva-card-content {
-          transform: scale(1);
-          bottom: 20px;
+          opacity: 1;
+          bottom: 30px;
         }
 
         .seva-card-tag {
           position: absolute;
-          top: 14px;
-          right: 14px;
+          top: 15px;
+          right: 15px;
           z-index: 10;
-          font-size: 10px;
-          font-weight: 700;
-          padding: 3px 8px;
-          border-radius: 20px;
-          background: rgba(220, 38, 38, 0.15);
-          color: #DC2626;
-          letter-spacing: 0.05em;
+          font-size: 9px;
+          font-weight: 800;
+          padding: 4px 10px;
+          border-radius: 100px;
+          background: #DC2626;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 1px;
         }
       `}</style>
     </section>
   );
 }
 
-function ServiceCard({
-  service,
-  index,
-  inView,
-}: {
-  service: (typeof services)[0];
-  index: number;
-  inView: boolean;
-}) {
+function ServiceCard({ service, index, inView }: any) {
   const Icon = service.icon;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className="seva-card">
-        {service.tag && (
-          <span className="seva-card-tag">{service.tag}</span>
-        )}
+        {service.tag && <span className="seva-card-tag">{service.tag}</span>}
 
         <div className="seva-card-inner">
-          {/* Icon — visible by default, moves up on hover */}
           <div className="seva-card-icon">
-            <Icon size={44} color="#DC2626" />
-            <span style={{ color: "#111827", fontSize: "13px", fontWeight: 600, opacity: 0.7 }}>
+            <div className="p-4 rounded-2xl bg-white shadow-sm border border-red-50">
+               <Icon size={40} className="text-red-600" />
+            </div>
+            <span className="text-gray-900 font-bold text-sm tracking-tight">
               {service.title}
             </span>
           </div>
 
-          {/* Content — hidden, reveals on hover */}
           <div className="seva-card-content">
-            <h3
-              style={{
-                color: "#111827",
-                fontWeight: 700,
-                fontSize: "15px",
-                lineHeight: "1.3",
-                marginBottom: "8px",
-                letterSpacing: "0.03em",
-                textTransform: "uppercase",
-                textAlign: "center",
-              }}
-            >
+            <h3 className="text-gray-900 font-black text-sm uppercase mb-2">
               {service.title}
             </h3>
-            <p style={{ color: "#7f1d1d", fontSize: "12px", lineHeight: "1.6", textAlign: "center" }}>
+            <p className="text-red-900/70 text-[11px] leading-relaxed font-medium">
               {service.description}
             </p>
           </div>
