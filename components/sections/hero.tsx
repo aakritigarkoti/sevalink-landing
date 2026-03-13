@@ -8,12 +8,13 @@ import Aurora from "@/components/ui/Aurora";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden flex items-center" style={{ backgroundColor: "#FFF3E0" }}>
-      <Aurora colorStops={["#DC2626", "#FF6B6B", "#FFF3E0"]} amplitude={0.5} blend={0.3} speed={0.5} />
+    <section className="relative overflow-hidden flex items-center min-h-screen" style={{ backgroundColor: "#FFF3E0", marginTop: "-80px", paddingTop: "80px" }}>
+      {/* Aurora blend kam kiya — 0.3 se 0.15 — ab itna dark nahi hoga */}
+      <Aurora colorStops={["#DC2626", "#FF6B6B", "#FFF3E0"]} amplitude={0.3} blend={0.15} speed={0.5} />
       <div className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full blur-3xl" style={{ backgroundColor: "#FFCDD2", opacity: 0.3 }} />
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full blur-3xl" style={{ backgroundColor: "#FFCDD2", opacity: 0.2 }} />
 
-      <div className="relative mx-auto max-w-7xl px-4 lg:px-8 pt-24 pb-16 w-full" style={{ zIndex: 1 }}>
+      <div className="relative mx-auto max-w-7xl px-4 lg:px-8 pt-32 pb-16 w-full" style={{ zIndex: 1 }}>
         <div className="flex flex-col lg:flex-row items-center gap-10">
 
           {/* Left Content */}
@@ -28,14 +29,20 @@ export function HeroSection() {
             <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, delay: 0.1 }} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
               {["Emergency", "Healthcare When", "You Need It Most"].map((line, i) => (
                 <motion.span key={i} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }} className="block">
-                  <motion.span whileHover={{ x: 8 }} transition={{ duration: 0.2 }} className={`inline-block cursor-default ${i === 0 ? "text-gray-900" : "text-red-600"}`}>
+                  <motion.span whileHover={{ x: 8 }} transition={{ duration: 0.2 }} className="inline-block cursor-default text-red-600">
                     {line}
                   </motion.span>
                 </motion.span>
               ))}
             </motion.h1>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="text-gray-600 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
+            {/* Paragraph — dark gray, readable on both mobile and desktop */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-gray-800 font-semibold text-base sm:text-lg max-w-xl mb-8 leading-relaxed"
+            >
               SevaLink connects patients, hospitals, and ambulance services for faster emergency medical transportation. One click connects you to life-saving care.
             </motion.p>
 
@@ -67,11 +74,11 @@ export function HeroSection() {
               .animated-btn:hover .btn-circle { width: 220px; height: 220px; opacity: 1; }
             `}</style>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} className="flex flex-wrap items-center gap-4">
               {["Verified Hospitals", "GPS Tracked", "Under 8 Min Response"].map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-green-600 font-bold text-xs">✓</span>
-                  <span className="text-xs sm:text-sm">{item}</span>
+                  <span className="text-xs sm:text-sm text-gray-800 font-semibold">{item}</span>
                 </div>
               ))}
             </motion.div>
@@ -113,9 +120,10 @@ export function HeroSection() {
             </motion.div>
 
             <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-lg px-4">
-              <Image src="/images/unnamed.png" alt="SevaLink Ambulance" width={600} height={450} className="h-auto w-full drop-shadow-2xl" priority />
+              <Image src="/images/ambulance.png" alt="SevaLink Ambulance" width={600} height={450} className="h-auto w-full drop-shadow-2xl" priority />
             </motion.div>
           </div>
+
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -20,6 +20,7 @@ export const Header = () => {
   ];
 
   useEffect(() => {
+    setIsScrolled(window.scrollY > 20);
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -30,13 +31,16 @@ export const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-white/80 backdrop-blur-xl shadow-lg border-b" : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        backgroundColor: isScrolled ? "rgba(255, 243, 224, 0.55)" : "transparent",
+        backdropFilter: isScrolled ? "blur(12px)" : "none",
+        WebkitBackdropFilter: isScrolled ? "blur(12px)" : "none",
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          
+
           {/* Logo */}
           <motion.a href="/" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Image
@@ -95,7 +99,8 @@ export const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 backdrop-blur-xl border-b"
+            className="lg:hidden backdrop-blur-xl"
+            style={{ backgroundColor: "rgba(255,255,255,0.95)" }}
           >
             <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col gap-4">
               {navItems.map((item) => (

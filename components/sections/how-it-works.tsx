@@ -14,7 +14,6 @@ const steps = [
 const EASE = "easeOut";
 const DURATION = 0.45;
 
-// --- Aapka Favorite Map Screen Logic ---
 function MapScreen() {
   return (
     <div className="relative w-full h-full overflow-hidden bg-[#e8e0d8]">
@@ -28,7 +27,7 @@ function MapScreen() {
         <line x1="0" y1="190" x2="200" y2="190" stroke="#f5d86e" strokeWidth="8" />
         <line x1="60" y1="0" x2="60" y2="380" stroke="#f0f0e8" strokeWidth="4" />
         <line x1="140" y1="0" x2="140" y2="380" stroke="#f0f0e8" strokeWidth="4" />
-        
+
         {/* Animated Path */}
         <motion.path
           d="M 60 280 L 60 190 L 100 190 L 100 120"
@@ -37,19 +36,19 @@ function MapScreen() {
           animate={{ strokeDashoffset: 0 }}
           transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1.5 }}
         />
-        
+
         {/* Ambulance Marker */}
         <motion.circle cx="60" cy="280" r="5" fill="white" stroke="#DC2626" strokeWidth="2"
           animate={{ cx: [60, 60, 100, 100], cy: [280, 190, 190, 120] }}
           transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1.5 }}
         />
-        
+
         {/* Destination Pin */}
         <path d="M100 126 C100 126 88 114 88 107 C88 100.4 93.4 95 100 95 C106.6 95 112 100.4 112 107 C112 114 100 126 100 126Z" fill="#4285f4" />
       </svg>
 
-      {/* Top Header Card */}
-      <div className="absolute top-0 left-0 right-0 p-2 bg-white/95">
+      {/* Top Header Card — notch ke neeche dikhega ab */}
+      <div className="absolute left-0 right-0 p-2 bg-white/95" style={{ top: "28px" }}>
         <div className="flex items-center gap-1.5">
           <motion.div className="w-2 h-2 rounded-full bg-red-600" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.2, repeat: Infinity }} />
           <span className="text-[10px] font-bold text-gray-800 uppercase tracking-tighter">Live Tracking</span>
@@ -78,7 +77,6 @@ function MapScreen() {
   );
 }
 
-// --- Step Card with Side Slide Animation ---
 function StepCard({ step, align }: { step: typeof steps[0]; align: "left" | "right" }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
@@ -113,9 +111,9 @@ export default function HowItWorksSection() {
   return (
     <section className="w-full py-20 px-4 bg-[#FEF3E2] overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        
+
         {/* Heading */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -129,31 +127,32 @@ export default function HowItWorksSection() {
           </h2>
         </motion.div>
 
-        {/* The Grid Layout (Phone in Middle) */}
+        {/* Grid Layout */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
-          
-          {/* Left Steps (01, 02) */}
+
+          {/* Left Steps */}
           <div className="flex flex-col gap-12 w-full max-w-[320px] order-2 lg:order-1">
             <StepCard step={steps[0]} align="right" />
             <StepCard step={steps[1]} align="right" />
           </div>
 
-          {/* Center Phone Mockup (Favorite Map logic inside) */}
-          <motion.div 
+          {/* Center Phone Mockup */}
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="relative order-1 lg:order-2"
           >
             <div className="absolute inset-0 bg-red-200/40 blur-[60px] rounded-full -z-10 translate-y-8" />
+            {/* Phone frame */}
             <div className="relative w-[240px] h-[480px] rounded-[40px] border-[8px] border-slate-900 bg-[#1a1a2e] shadow-2xl overflow-hidden">
               {/* Notch */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-2xl z-20" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-7 bg-slate-900 rounded-b-2xl z-20" />
               <MapScreen />
             </div>
           </motion.div>
 
-          {/* Right Steps (03, 04) */}
+          {/* Right Steps */}
           <div className="flex flex-col gap-12 w-full max-w-[320px] order-3 lg:order-3">
             <StepCard step={steps[2]} align="left" />
             <StepCard step={steps[3]} align="left" />
@@ -161,7 +160,7 @@ export default function HowItWorksSection() {
 
         </div>
 
-        {/* Bottom Sequence Dots Animation */}
+        {/* Bottom Dots */}
         <div className="flex justify-center items-center gap-3 mt-20">
           {steps.map((_, i) => (
             <motion.div
