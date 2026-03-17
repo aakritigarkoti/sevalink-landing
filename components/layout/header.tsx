@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 export const Header = () => {
@@ -12,8 +13,13 @@ export const Header = () => {
 
   const navItems = [
     { name: "Services", href: "/services" },
-    { name: "Providers", href: "/#providers" },
+    { name: "Providers", href: "/provider" },
   ];
+
+  const isActivePath = (href: string) => {
+    if (!pathname) return false;
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <motion.header
@@ -40,20 +46,22 @@ export const Header = () => {
           {/* Desktop Nav - Visibility Optimized */}
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item, index) => (
-              <motion.a
+              <motion.div
                 key={item.name}
-                href={item.href}
-                // Changed text to slate-950 and font-black for maximum contrast
-                className={`relative px-5 py-2 text-sm font-black transition-colors group ${
-                  pathname === item.href ? "text-red-600" : "text-slate-950 hover:text-red-600"
-                }`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
               >
-                {item.name}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 group-hover:w-3/4 transition-all duration-300 rounded-full" />
-              </motion.a>
+                <Link
+                  href={item.href}
+                  className={`relative block px-5 py-2 text-sm font-black transition-colors group ${
+                    isActivePath(item.href) ? "text-red-600" : "text-slate-950 hover:text-red-600"
+                  }`}
+                >
+                  {item.name}
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 group-hover:w-3/4 transition-all duration-300 rounded-full" />
+                </Link>
+              </motion.div>
             ))}
           </nav>
 
@@ -107,14 +115,18 @@ export const Header = () => {
 
                 <nav className="flex flex-col gap-2">
                   {navItems.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
-                      className="rounded-xl px-3 py-3 text-base font-bold text-slate-900 hover:bg-red-50 hover:text-red-600"
+                      className={`rounded-xl px-3 py-3 text-base font-bold transition-colors ${
+                        isActivePath(item.href)
+                          ? "bg-red-50 text-red-600"
+                          : "text-slate-900 hover:bg-red-50 hover:text-red-600"
+                      }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </div>
