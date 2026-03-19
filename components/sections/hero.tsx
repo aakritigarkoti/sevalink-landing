@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone, MapPin, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Aurora from "../ui/Aurora";
+import { FloatingMedicalIcons } from "../ui/medical-background";
 
 const stats = [
   { icon: Clock, value: "< 8 min", label: "Avg Response" },
@@ -16,17 +16,10 @@ const stats = [
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
-      {/* Aurora background (light, non-muddy palette) */}
-      <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
-        <Aurora
-          colorStops={["#f7a3b5", "#ec7490", "#c44f55"]}
-          blend={0.62}
-          amplitude={0.95}
-          speed={0.48}
-        />
-      </div>
+      {/* Minimal healthcare background with floating icons */}
+      <FloatingMedicalIcons />
 
-      <div className="absolute inset-0 z-0 bg-white/30" />
+      <div className="absolute inset-0 z-0 bg-white/40" />
 
       {/* Dot pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03] z-0" style={{
