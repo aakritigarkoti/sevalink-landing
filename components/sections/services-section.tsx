@@ -162,7 +162,7 @@ const contentItemVariants = {
 
 function ServiceCard({ service, index, inView }: ServiceCardProps) {
   const Icon = service.icon;
-  const MotionIcon = motion(Icon);
+  const MotionIcon = motion.create(Icon);
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,

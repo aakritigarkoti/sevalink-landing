@@ -75,41 +75,61 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Slide from right */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-gray-200 overflow-hidden"
-          >
-            <nav className="container mx-auto px-4 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={`px-3 py-2.5 text-sm font-semibold rounded-lg transition-colors ${
-                    isActivePath(link.href)
-                      ? "text-red-600 bg-red-50"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }`}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-200">
-                <a href="tel:109" className="flex items-center gap-1.5 text-sm font-semibold text-red-600">
-                  <Phone className="w-4 h-4" />
-                  Call 109
-                </a>
-                <Link href="/book?service=ambulance" className="ml-auto px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors">
-                  Book
-                </Link>
-              </div>
-            </nav>
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              className="fixed inset-0 top-16 md:hidden bg-black/30 z-40"
+            />
+
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed top-16 right-0 bottom-0 w-[70%] max-w-sm md:hidden bg-white shadow-2xl z-50 overflow-y-auto"
+            >
+              <nav className="p-6 flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className={`px-4 py-3 text-base font-semibold rounded-lg transition-all ${
+                      isActivePath(link.href)
+                        ? "text-red-600 bg-red-50"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="mt-6 pt-6 border-t border-gray-200 flex flex-col gap-3">
+                  <a 
+                    href="tel:109" 
+                    className="flex items-center gap-2 px-4 py-3 text-base font-semibold text-red-600 rounded-lg hover:bg-red-50 transition-all"
+                  >
+                    <Phone className="w-5 h-5" />
+                    Call 109
+                  </a>
+                  <Link 
+                    href="/book?service=ambulance" 
+                    className="px-4 py-3 rounded-lg bg-gradient-to-r from-red-600 to-orange-500 text-white text-base font-semibold hover:shadow-lg transition-all text-center"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Book Ambulance
+                  </Link>
+                </div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
