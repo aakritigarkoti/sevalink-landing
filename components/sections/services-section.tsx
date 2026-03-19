@@ -99,6 +99,17 @@ const services: ServiceItem[] = [
     ],
     tag: "Always On",
   },
+  {
+    icon: Users,
+    title: "Community Network",
+    description: "Verified community first-responders for hyper-local aid.",
+    details: [
+      "Rapid assistance within small neighborhoods",
+      "Trained volunteers for immediate first-aid",
+      "Bridge to professional emergency care",
+    ],
+    tag: "New",
+  },
 ];
 
 export default function ServicesSection() {
