@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Building2,
@@ -225,14 +226,22 @@ function ProviderSectionBlock({
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={() => onJoin(provider)}
-            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_10px_25px_rgba(220,38,38,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-700"
-          >
-            {provider.ctaText}
-            <ArrowRight className="h-4 w-4" />
-          </button>
+          <div className="mt-7 flex flex-wrap gap-4">
+            <button
+              type="button"
+              onClick={() => onJoin(provider)}
+              className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_10px_25px_rgba(220,38,38,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-700"
+            >
+              {provider.ctaText}
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            <Link
+              href={`/provider/${provider.id}`}
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-black uppercase tracking-wide text-slate-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+            >
+              View Details
+            </Link>
+          </div>
         </div>
       </motion.div>
     </section>

@@ -123,9 +123,9 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-            className="relative hidden lg:block"
+            className="relative"
           >
-            <div className="relative rounded-3xl bg-white/80 backdrop-blur-md border border-white/60 p-8 shadow-2xl">
+            <div className="relative rounded-3xl bg-white/80 backdrop-blur-md border border-white/60 p-5 md:p-8 shadow-2xl">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
                 <Image
                   src="/images/ambulance.png"
@@ -145,7 +145,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
-                className="absolute -left-6 top-1/3 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg"
+                className="absolute -left-6 top-1/3 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg hidden md:block"
               >
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
@@ -162,7 +162,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1, duration: 0.5 }}
-                className="absolute -right-4 bottom-1/4 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg"
+                className="absolute -right-4 bottom-1/4 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg hidden md:block"
               >
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
