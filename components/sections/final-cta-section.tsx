@@ -138,7 +138,6 @@ export function FinalCTASection() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              background: "#dc2626",
               cursor: "pointer",
               border: "none"
             }}
