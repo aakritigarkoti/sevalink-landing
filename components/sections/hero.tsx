@@ -1,10 +1,8 @@
 'use client';
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone, MapPin, Clock, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { FloatingMedicalIcons } from "../ui/medical-background";
 
 const stats = [
@@ -14,6 +12,13 @@ const stats = [
 ];
 
 export function HeroSection() {
+  const handleScrollToServices = () => {
+    document.getElementById("services")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <section className="relative overflow-hidden pt-12 md:pt-14">
       {/* Minimal healthcare background with floating icons */}
@@ -64,8 +69,9 @@ export function HeroSection() {
               className="mb-8 flex flex-wrap gap-3"
             >
               <motion.div whileHover={{ y: -3, scale: 1.01 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  href="/booking/ambulance"
+                <button
+                  type="button"
+                  onClick={handleScrollToServices}
                   className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl px-8 text-base font-semibold text-white shadow-[0_14px_30px_rgba(220,38,38,0.35)]"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-red-700" />
@@ -77,24 +83,10 @@ export function HeroSection() {
                   />
                   <span className="relative z-10 inline-flex items-center gap-2">
                     <Phone className="h-5 w-5" />
-                    Book Ambulance Now
+                    Book Ambulance
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
-                </Link>
-              </motion.div>
-
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.985 }}>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="h-12 rounded-xl border-gray-300 bg-white/80 px-8 text-base font-semibold backdrop-blur-sm hover:bg-white"
-                >
-                  <Link href="/services" className="inline-flex items-center gap-2">
-                    Explore Services
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                </button>
               </motion.div>
             </motion.div>
 
@@ -184,11 +176,11 @@ export function HeroSection() {
         <div className="container mx-auto px-4 sm:px-6 py-3 flex items-center justify-center gap-4 text-sm">
           <Phone className="w-4 h-4 text-red-600" />
           <span className="text-gray-700 font-medium">Emergency?</span>
-          <a href="tel:108" className="font-bold text-red-600 hover:text-red-700 transition-colors">
+          <a href="tel:108" className="hover-link font-bold text-red-600 transition-colors">
             Call 108 Now
           </a>
           <span className="text-gray-300">|</span>
-          <a href="tel:112" className="font-bold text-red-600 hover:text-red-700 transition-colors">
+          <a href="tel:112" className="hover-link font-bold text-red-600 transition-colors">
             Call 112
           </a>
         </div>

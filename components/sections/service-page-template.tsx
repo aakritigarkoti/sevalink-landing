@@ -83,12 +83,12 @@ export function ServicePageTemplate({
             Get emergency support in minutes with verified providers and real-time coordination.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Link
-              href="/services/emergency-ambulance"
+            <a
+              href="tel:109"
               className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-red-700 hover:-translate-y-0.5 hover:shadow-lg"
             >
-              Book Ambulance
-            </Link>
+              Call 109
+            </a>
             <Link
               href="/contact"
               className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-800 transition-all duration-300 hover:border-gray-400 hover:bg-gray-50"

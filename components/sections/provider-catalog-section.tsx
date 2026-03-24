@@ -175,6 +175,21 @@ function ProviderSectionBlock({
                 sizes="(max-width: 1024px) 100vw, 48vw"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#0B3A75]/25 via-transparent to-transparent" />
+              
+              {/* Coming Soon Badge */}
+              {provider.id === "homecare" && (
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  className="absolute top-4 right-4 z-10"
+                >
+                  <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-2 shadow-lg border border-amber-200">
+                    <div className="h-2 w-2 rounded-full bg-white animate-pulse" />
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">Coming Soon</span>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </div>
         </div>

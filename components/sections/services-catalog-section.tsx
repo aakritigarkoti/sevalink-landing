@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Ambulance, HousePlus, Calendar, ArrowRight, CheckCircle2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -30,7 +29,7 @@ const services: ServiceBlock[] = [
     description:
       "Get immediate ambulance dispatch with live route visibility, trained emergency support, and quick hospital coordination when every minute matters.",
     ctaText: "Book Ambulance Now",
-    ctaHref: "/services",
+    ctaHref: "/contact",
     icon: Ambulance,
     iconBg: "from-red-500 to-red-600",
     imageSrc: "/images/5889811436_32ab8f2a07_b.jpg",
@@ -50,7 +49,7 @@ const services: ServiceBlock[] = [
     description:
       "Bring professional medical care to your doorstep with qualified nurses, assisted daily routines, and personalized recovery support for families.",
     ctaText: "Book Homecare",
-    ctaHref: "/services",
+    ctaHref: "/contact",
     icon: HousePlus,
     iconBg: "from-blue-500 to-cyan-500",
     imageSrc: "/images/family-service.webp",
@@ -71,7 +70,7 @@ const services: ServiceBlock[] = [
     description:
       "Find the right specialist quickly, compare availability, and reserve priority slots for faster diagnosis and treatment without long waiting lines.",
     ctaText: "Book Appointment",
-    ctaHref: "/services",
+    ctaHref: "/contact",
     icon: Calendar,
     iconBg: "from-blue-600 to-sky-500",
     imageSrc: "/images/hospital-appointment.webp",
@@ -136,7 +135,7 @@ function ServiceShowcaseBlock({
             >
               <Icon className="h-6 w-6" strokeWidth={1.8} />
             </span>
-            <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-4xl">{service.title}</h2>
+            <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-4xl transition-all hover:text-red-500 hover:underline cursor-pointer">{service.title}</h2>
           </div>
 
           <p className="text-sm leading-relaxed text-slate-600 sm:text-base">{service.description}</p>
@@ -156,18 +155,18 @@ function ServiceShowcaseBlock({
                 className="flex items-start gap-3"
               >
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-                <span className="text-sm text-slate-700">{highlight}</span>
+                <span className="text-sm text-slate-700 transition-all hover:text-red-500 hover:underline cursor-pointer">{highlight}</span>
               </motion.div>
             ))}
           </div>
 
-          <Link
-            href={service.ctaHref}
-            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_10px_25px_rgba(220,38,38,0.35)]"
+          <button
+            type="button"
+            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_10px_25px_rgba(220,38,38,0.35)] transition-colors duration-200 hover:bg-red-700"
           >
             {service.ctaText}
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </button>
         </div>
       </motion.div>
     </section>

@@ -69,7 +69,7 @@ export default function ServicesSection() {
   const [activeCardId, setActiveCardId] = useState<string | null>(services[0]?.title ?? null);
 
   return (
-    <section className="w-full min-h-fit landing-section-spacing overflow-hidden bg-gradient-to-b from-[#FFF0E2] to-[#FFE7D2] scroll-smooth">
+    <section id="services" className="w-full min-h-fit landing-section-spacing overflow-hidden bg-gradient-to-b from-[#FFF0E2] to-[#FFE7D2] scroll-smooth">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="mb-3 inline-block rounded-full bg-red-600/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-red-600 sm:mb-4 sm:px-5 sm:py-2 sm:text-xs">
@@ -145,7 +145,7 @@ function ServiceCard({
         <Icon className={`h-5 w-5 ${service.iconText}`} strokeWidth={2} />
       </div>
 
-      <h3 className="mb-2 text-lg font-bold tracking-tight text-gray-900 sm:text-xl">{service.title}</h3>
+      <h3 className="mb-2 text-lg font-bold tracking-tight text-gray-900 sm:text-xl transition-all hover:text-red-500 hover:underline cursor-pointer">{service.title}</h3>
       <p className="text-sm leading-relaxed text-gray-500 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
         {service.description}
       </p>

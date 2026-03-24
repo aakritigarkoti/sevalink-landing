@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Smartphone, Ambulance, MapPin, CheckCircle } from "lucide-react";
+import { Map } from "@/components/ui/map";
 
 const steps = [
   { id: "01", icon: Smartphone, title: "Book Ambulance", description: "Open SevaLink app and tap 'Book Now'. Share your location in one click." },
@@ -15,48 +16,46 @@ const EASE = "easeOut";
 const DURATION = 0.45;
 
 function MapScreen() {
+  // Noida/Delhi region coordinates - center of map [latitude, longitude]
+  const mapCenter: [number, number] = [28.5355, 77.3910];
+  
+  // Sample ambulance location marker
+  const ambulanceMarker = [
+    { lat: 28.5355, lng: 77.3910, label: "Hospital" }
+  ];
+
   return (
-    <div className="relative w-full h-full overflow-hidden bg-[#e8e0d8]">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 380" preserveAspectRatio="xMidYMid slice">
-        <rect x="0" y="0" width="200" height="380" fill="#e8e0d8" />
-        <rect x="10" y="20" width="40" height="30" rx="4" fill="#c8e6c9" opacity="0.8" />
-        <rect x="140" y="180" width="50" height="40" rx="4" fill="#c8e6c9" opacity="0.8" />
-        <rect x="10" y="70" width="25" height="20" rx="2" fill="#d4c9bc" />
-        <rect x="40" y="65" width="18" height="25" rx="2" fill="#ccc0b3" />
-        <line x1="100" y1="0" x2="100" y2="380" stroke="#f5d86e" strokeWidth="8" />
-        <line x1="0" y1="190" x2="200" y2="190" stroke="#f5d86e" strokeWidth="8" />
-        <line x1="60" y1="0" x2="60" y2="380" stroke="#f0f0e8" strokeWidth="4" />
-        <line x1="140" y1="0" x2="140" y2="380" stroke="#f0f0e8" strokeWidth="4" />
-
-        {/* Animated Path */}
-        <motion.path
-          d="M 60 280 L 60 190 L 100 190 L 100 120"
-          fill="none" stroke="#4285f4" strokeWidth="5"
-          strokeLinecap="round" strokeDasharray="250" strokeDashoffset={250}
-          animate={{ strokeDashoffset: 0 }}
-          transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1.5 }}
-        />
-
-        {/* Ambulance Marker */}
-        <motion.circle cx="60" cy="280" r="5" fill="white" stroke="#DC2626" strokeWidth="2"
-          animate={{ cx: [60, 60, 100, 100], cy: [280, 190, 190, 120] }}
-          transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1.5 }}
-        />
-
-        {/* Destination Pin */}
-        <path d="M100 126 C100 126 88 114 88 107 C88 100.4 93.4 95 100 95 C106.6 95 112 100.4 112 107 C112 114 100 126 100 126Z" fill="#4285f4" />
-      </svg>
-
-      {/* Top Header Card — notch ke neeche dikhega ab */}
-      <div className="absolute left-0 right-0 p-2 bg-white/95" style={{ top: "28px" }}>
-        <div className="flex items-center gap-1.5">
-          <motion.div className="w-2 h-2 rounded-full bg-red-600" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.2, repeat: Infinity }} />
-          <span className="text-[10px] font-bold text-gray-800 uppercase tracking-tighter">Live Tracking</span>
+    <div className="relative w-full h-full overflow-hidden rounded-2xl bg-gray-100">
+      {/* Top overlays - always visible above map layers */}
+      <div className="absolute top-2 left-2 right-2 z-[1100] flex items-center pointer-events-none">
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-white/95 border border-white/50 px-3 py-1.5 shadow-lg shadow-black/10 backdrop-blur-sm">
+          <motion.div
+            className="w-1.5 h-1.5 rounded-full bg-red-600"
+            animate={{ opacity: [1, 0.4, 1] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+          />
+          <span className="text-[10px] font-bold text-gray-800 uppercase tracking-tighter whitespace-nowrap">Live Tracking</span>
         </div>
       </div>
 
-      {/* Bottom Driver Card */}
-      <div className="absolute bottom-0 left-0 right-0 p-3 bg-white/97 border-t border-gray-100">
+      {/* Interactive Map Component - with scroll zoom enabled */}
+      <Map 
+        center={mapCenter} 
+        zoom={15}
+        className="h-full w-full"
+        markers={ambulanceMarker}
+        showControls={true}
+        scrollZoom={true}
+        dragging={true}
+      />
+
+      {/* Bottom Driver Card - Ambulance Status */}
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="absolute bottom-0 left-0 right-0 p-3 bg-white/97 backdrop-blur-sm border-t border-gray-100 z-[1100]"
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 bg-red-50 rounded-full flex items-center justify-center">
@@ -72,7 +71,7 @@ function MapScreen() {
             <p className="text-[8px] text-gray-400 mt-1 uppercase">ETA</p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -99,9 +98,9 @@ function StepCard({ step, align }: { step: typeof steps[0]; align: "left" | "rig
         <Icon size={24} color="white" />
       </motion.div>
       <div>
-        <p className="text-[9px] sm:text-[10px] font-black text-red-600 tracking-widest uppercase mb-1">Step {step.id}</p>
-        <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-tight mb-2">{step.title}</h3>
-        <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">{step.description}</p>
+        <p className="text-[10px] sm:text-[11px] font-black text-red-600 tracking-widest uppercase mb-1.5">Step {step.id}</p>
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight mb-3">{step.title}</h3>
+        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{step.description}</p>
       </div>
     </motion.div>
   );
@@ -146,8 +145,13 @@ export default function HowItWorksSection() {
             <div className="absolute inset-0 bg-red-200/40 blur-[60px] rounded-full -z-10 translate-y-8" />
             {/* Phone frame */}
             <div className="relative w-52 sm:w-64 lg:w-[240px] h-96 sm:h-[480px] lg:h-[480px] rounded-3xl sm:rounded-[40px] border-4 sm:border-[8px] border-slate-900 bg-[#1a1a2e] shadow-2xl overflow-hidden">
-              {/* Notch */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-7 bg-slate-900 rounded-b-2xl z-20" />
+              {/* Camera notch */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-[1200]">
+                <div className="w-16 h-3 bg-black rounded-b-xl flex items-center justify-center">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full" />
+                </div>
+              </div>
+
               <MapScreen />
             </div>
           </motion.div>

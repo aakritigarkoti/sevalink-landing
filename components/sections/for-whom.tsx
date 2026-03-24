@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { HeartPulse, Building2, LayoutGrid, Check, Home } from "lucide-react";
 
 type Audience = {
@@ -9,8 +9,8 @@ type Audience = {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   image: string;
   features: string[];
-  path: string;
   color: string;
+  href: string;
 };
 
 const audiences: Audience[] = [
@@ -20,8 +20,8 @@ const audiences: Audience[] = [
     icon: HeartPulse,
     image: "/images/Individuals&Family.jpg",
     features: ["Book ambulance", "Track ambulance", "View hospitals"],
-    path: "/services",
     color: "bg-red-600",
+    href: "/services",
   },
   {
     id: "driver",
@@ -29,8 +29,8 @@ const audiences: Audience[] = [
     icon: Building2,
     image: "/images/Hospital_Partners.jpg",
     features: ["Accept rides", "Manage trips", "Live status updates"],
-    path: "/provider",
     color: "bg-red-600",
+    href: "/provider",
   },
   {
     id: "fleet",
@@ -38,8 +38,8 @@ const audiences: Audience[] = [
     icon: LayoutGrid,
     image: "/images/Network_providers.jpg",
     features: ["Manage vehicles", "Track performance", "Monitor drivers"],
-    path: "/provider",
     color: "bg-red-600",
+    href: "/provider",
   },
   {
     id: "hospital",
@@ -47,15 +47,14 @@ const audiences: Audience[] = [
     icon: Home,
     image: "/images/doctor.jpg",
     features: ["Manage bookings", "Patient coordination", "Care team sync"],
-    path: "/services",
     color: "bg-red-600",
+    href: "/services",
   },
 ];
 
 export function ForWhomSection() {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,10 +64,6 @@ export function ForWhomSection() {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
-
-  const handleLearnMore = (path: string) => {
-    router.push(path);
-  };
 
   return (
     <section ref={ref} className="min-h-fit flex items-center landing-section-spacing" style={{ backgroundColor: "#FFF3E0" }}>
@@ -134,12 +129,12 @@ export function ForWhomSection() {
                     </div>
                   ))}
                 </div>
-                <button
-                  onClick={() => handleLearnMore(item.path)}
-                  className="w-full mt-6 sm:mt-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-gray-900 to-gray-800 text-white font-black text-xs sm:text-sm uppercase tracking-widest hover:from-red-600 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex-shrink-0"
+                <Link
+                  href={item.href}
+                  className="w-full mt-6 sm:mt-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-red-600 to-red-500 text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center flex-shrink-0 transition-all hover:text-red-100 hover:underline hover:bg-red-700 cursor-pointer"
                 >
                   Learn More
-                </button>
+                </Link>
               </div>
             </div>
           ))}

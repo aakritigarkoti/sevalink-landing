@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
+import ScrollRestorationControl from "@/components/ui/scroll-restoration";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   title: "SevaLink - Instant Emergency Ambulance Care",
   description: "One click connects you to life-saving care.",
   icons: {
-    icon: "/assets/brand/image.png",
+    icon: "/assets/brand/SevaLink-icon.png",
   },
 };
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
+        <ScrollRestorationControl />
         {children}
       </body>
     </html>

@@ -38,13 +38,13 @@ export const Header = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-18">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <Image
-              src="/assets/brand/sevalink.png"
+              src="/assets/brand/SevaLink-logo.png"
               alt="SevaLink"
-              width={64}
-              height={64}
-              className="object-contain"
+              width={240}
+              height={56}
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
               priority
             />
           </Link>
@@ -55,25 +55,21 @@ export const Header = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`px-4 py-2 text-sm font-semibold transition-colors relative group ${
-                  isActivePath(link.href) ? "text-red-600" : "text-gray-700 hover:text-red-600"
+                className={`hover-link px-4 py-2 text-sm font-semibold transition-colors relative group ${
+                  isActivePath(link.href) ? "text-red-600" : "text-gray-700"
                 }`}
               >
                 {link.label}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 rounded-full transition-all duration-300 group-hover:w-3/4" />
               </Link>
             ))}
           </nav>
 
           {/* CTA - Desktop */}
-          <div className="hidden md:flex items-center gap-3">
-            <a href="tel:109" className="flex items-center gap-1.5 text-sm font-semibold text-red-600 hover:text-red-700 transition-colors">
+          <div className="hidden md:flex items-center">
+            <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl cursor-pointer border-none">
               <Phone className="w-4 h-4" />
-              109
-            </a>
-            <Link href="/services/ambulance" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl">
-              Book Ambulance
-            </Link>
+              Call 108
+            </button>
           </div>
 
           {/* Mobile Toggle */}
@@ -94,11 +90,11 @@ export const Header = () => {
               <div className="flex flex-col h-full">
                 <div className="p-6 border-b border-gray-100 flex items-center justify-between">
                   <Image
-                    src="/assets/brand/sevalink.png"
-                    alt="SevaLink"
-                    width={48}
-                    height={48}
-                    className="object-contain"
+                    src="/assets/brand/SevaLink-icon.png"
+                    alt="SevaLink Icon"
+                    width={32}
+                    height={32}
+                    className="h-8 w-8 object-contain"
                   />
                 </div>
                 
@@ -110,7 +106,7 @@ export const Header = () => {
                       className={`px-4 py-3 text-base font-semibold rounded-lg transition-all ${
                         isActivePath(link.href)
                           ? "text-red-600 bg-red-50"
-                          : "text-gray-700 hover:bg-gray-100"
+                          : "text-gray-700 hover:bg-gray-100 hover-link"
                       }`}
                       onClick={() => setMobileOpen(false)}
                     >
@@ -119,20 +115,13 @@ export const Header = () => {
                   ))}
                   
                   <div className="mt-6 pt-6 border-t border-gray-200 flex flex-col gap-3">
-                    <a 
-                      href="tel:109" 
-                      className="flex items-center gap-2 px-4 py-3 text-base font-semibold text-red-600 rounded-lg hover:bg-red-50 transition-all"
-                    >
-                      <Phone className="w-5 h-5" />
-                      Call 109
-                    </a>
-                    <Link 
-                      href="/services/ambulance" 
-                      className="px-4 py-3 rounded-lg bg-gradient-to-r from-red-600 to-orange-500 text-white text-base font-semibold hover:shadow-lg transition-all text-center"
+                    <button 
+                      className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-red-600 text-white text-base font-semibold hover:bg-red-700 hover:shadow-lg transition-all text-center cursor-pointer border-none"
                       onClick={() => setMobileOpen(false)}
                     >
-                      Book Ambulance
-                    </Link>
+                      <Phone className="w-5 h-5" />
+                      Call 108
+                    </button>
                   </div>
                 </nav>
               </div>

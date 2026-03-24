@@ -13,10 +13,10 @@ const socialLinks = [
 
 const footerLinks = {
   "Services": [
-    { name: "Emergency Ambulance", href: "/services/emergency-ambulance" },
-    { name: "Homecare Services", href: "/services/homecare" },
-    { name: "Hospital Appointments", href: "/services/hospital" },
-    { name: "Family Tracking", href: "/services/family-tracking" },
+    { name: "Emergency Ambulance" },
+    { name: "Homecare Services" },
+    { name: "Hospital Appointments" },
+    { name: "Family Tracking" },
   ],
   "Platforms": [
     { name: "Patient App", href: "/platforms/patient" },
@@ -58,28 +58,25 @@ export const Footer = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.div whileHover={{ y: -3, scale: 1.03 }}>
-                <Link
-                  href="/services/emergency-ambulance"
+                <button
                   className="px-8 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-all duration-300 inline-block text-center shadow-lg hover:shadow-red-900/60 hover:shadow-2xl"
                 >
                   Request Ambulance
-                </Link>
+                </button>
               </motion.div>
               <motion.div whileHover={{ y: -3, scale: 1.03 }}>
-                <Link
-                  href="/services/homecare"
+                <button
                   className="px-8 py-3 border border-white/30 hover:border-white/50 hover:bg-white/5 text-white font-semibold rounded-lg transition-all duration-300 inline-block text-center"
                 >
                   Book Homecare
-                </Link>
+                </button>
               </motion.div>
               <motion.div whileHover={{ y: -3, scale: 1.03 }}>
-                <Link
-                  href="/services/hospital"
+                <button
                   className="px-8 py-3 border border-white/30 hover:border-white/50 hover:bg-white/5 text-white font-semibold rounded-lg transition-all duration-300 inline-block text-center"
                 >
                   Book Appointment
-                </Link>
+                </button>
               </motion.div>
             </div>
           </div>
@@ -95,11 +92,11 @@ export const Footer = () => {
             <div>
               <Link href="/" className="inline-block mb-4 transition-all duration-300 hover:opacity-80">
                 <Image 
-                  src="/assets/brand/sevalink-f.png" 
-                  alt="SevaLink Logo" 
-                  width={140} 
-                  height={40} 
-                  className="brightness-0 invert object-contain"
+                  src="/assets/brand/SevaLink-icon-f.png" 
+                  alt="SevaLink Icon" 
+                  width={80} 
+                  height={80} 
+                  className="h-30 w-30 object-cover transition-all duration-300 hover:scale-[1.03]"
                 />
               </Link>
               <p className="text-sm text-gray-300 mb-8 leading-relaxed line-clamp-4 transition-colors duration-300">
@@ -107,7 +104,7 @@ export const Footer = () => {
               </p>
               <div className="flex items-center gap-2 text-sm text-gray-400 transition-colors duration-300 hover:text-gray-300">
                 <MapPin className="w-4 h-4 text-gray-500 shrink-0" />
-                <span>India</span>
+                <span>Ahmedabad, Gujarat, India</span>
               </div>
             </div>
 
@@ -117,10 +114,7 @@ export const Footer = () => {
               <ul className="space-y-4">
                 {footerLinks.Services.map((link) => (
                   <li key={link.name}>
-                    <Link 
-                      href={link.href} 
-                      className="text-sm text-gray-400 hover:text-red-500 hover:translate-x-1 transition-all duration-300 inline-block hover:underline underline-offset-2"
-                    >
+                    <Link href="/services" className="hover-link text-sm text-gray-400 inline-block cursor-pointer">
                       {link.name}
                     </Link>
                   </li>
@@ -136,7 +130,7 @@ export const Footer = () => {
                   <li key={link.name}>
                     <Link 
                       href={link.href} 
-                      className="text-sm text-gray-400 hover:text-red-500 hover:translate-x-1 transition-all duration-300 inline-block hover:underline underline-offset-2"
+                      className="hover-link text-sm text-gray-400 hover:translate-x-1 transition-all duration-300 inline-block underline-offset-2"
                     >
                       {link.name}
                     </Link>
@@ -153,7 +147,7 @@ export const Footer = () => {
                   <li key={link.name}>
                     <Link 
                       href={link.href} 
-                      className="text-sm text-gray-400 hover:text-red-500 hover:translate-x-1 transition-all duration-300 inline-block hover:underline underline-offset-2"
+                      className="hover-link text-sm text-gray-400 hover:translate-x-1 transition-all duration-300 inline-block underline-offset-2"
                     >
                       {link.name}
                     </Link>
@@ -202,9 +196,11 @@ export const Footer = () => {
               </p>
             </motion.div>
             <div className="flex items-center gap-6 text-xs text-gray-400 transition-all duration-300">
-              <Link href="/privacy" className="hover:text-red-500 transition-all duration-300 hover:underline hover:translate-x-0.5">Privacy Policy</Link>
+              <Link href="/privacy-policy" className="hover-link transition-all duration-300 hover:translate-x-0.5">Privacy Policy</Link>
               <span className="w-1 h-1 bg-gray-700 rounded-full transition-all duration-300"></span>
-              <Link href="/terms" className="hover:text-red-500 transition-all duration-300 hover:underline hover:translate-x-0.5">Terms of Service</Link>
+              <Link href="/terms-and-conditions" className="hover-link transition-all duration-300 hover:translate-x-0.5">Terms & Conditions</Link>
+              <span className="w-1 h-1 bg-gray-700 rounded-full transition-all duration-300"></span>
+              <Link href="/refund-policy" className="hover-link transition-all duration-300 hover:translate-x-0.5">Refund Policy</Link>
               <span className="w-1 h-1 bg-gray-700 rounded-full transition-all duration-300"></span>
               <motion.button 
                 onClick={scrollToTop}

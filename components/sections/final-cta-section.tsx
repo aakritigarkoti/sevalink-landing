@@ -128,8 +128,7 @@ export function FinalCTASection() {
           transform: visible ? "translateY(0)" : "translateY(20px)",
           transition: "opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s",
         }}>
-          <Link
-            href="/book"
+          <button
             style={{
               padding: "clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px)", background: "#dc2626",
               color: "white", fontWeight: 900, borderRadius: "999px",
@@ -138,15 +137,17 @@ export function FinalCTASection() {
               transition: "background 0.3s ease, transform 0.2s ease",
               display: "flex",
               alignItems: "center",
-              gap: "8px"
+              gap: "8px",
+              background: "#dc2626",
+              cursor: "pointer",
+              border: "none"
             }}
             onMouseEnter={e => (e.currentTarget.style.background = "#b91c1c")}
             onMouseLeave={e => (e.currentTarget.style.background = "#dc2626")}
           >
             <Ambulance className="w-5 h-5" /> Book Ambulance Now
-          </Link>
-          <Link
-            href="tel:108"
+          </button>
+          <button
             style={{
               padding: "clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px)",
               border: "2px solid rgba(255,255,255,0.3)",
@@ -156,13 +157,15 @@ export function FinalCTASection() {
               transition: "border 0.3s ease",
               display: "flex",
               alignItems: "center",
-              gap: "8px"
+              gap: "8px",
+              background: "transparent",
+              cursor: "pointer"
             }}
             onMouseEnter={e => (e.currentTarget.style.border = "2px solid rgba(255,255,255,0.7)")}
             onMouseLeave={e => (e.currentTarget.style.border = "2px solid rgba(255,255,255,0.3)")}
           >
             <Phone className="w-5 h-5" /> Call 108
-          </Link>
+          </button>
         </div>
 
       </div>
