@@ -1,0 +1,27 @@
+.ctaSection {
+  background: linear-gradient(135deg, #1a0000 0%, #3d0000 40%, #7f1d1d 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: auto;
+}
+
+.primaryCtaButton {
+  padding: clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px);
+  background: #dc2626;
+  color: white;
+  font-weight: 900;
+  border-radius: 999px;
+  font-size: clamp(12px, 2vw, 15px);
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4);
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.primaryCtaButton:hover {
+  background: #b91c1c;
+}

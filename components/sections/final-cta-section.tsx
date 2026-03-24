@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { Ambulance, Phone } from "lucide-react";
+import styles from "./final-cta-section.module.css";
 
 const trustPoints = ["No Hidden Charges", "10 Minute Response", "Pan India Coverage"];
 
@@ -22,13 +22,7 @@ export function FinalCTASection() {
   return (
     <section
       ref={ref}
-      className="min-h-fit flex items-center justify-center landing-section-spacing"
-      style={{
-        background: "linear-gradient(135deg, #1a0000 0%, #3d0000 40%, #7f1d1d 100%)",
-        position: "relative",
-        overflow: "hidden",
-        minHeight: "auto",
-      }}
+      className={`min-h-fit flex items-center justify-center landing-section-spacing ${styles.ctaSection}`}
     >
       {/* Glow blobs */}
       <div style={{
@@ -128,22 +122,7 @@ export function FinalCTASection() {
           transform: visible ? "translateY(0)" : "translateY(20px)",
           transition: "opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s",
         }}>
-          <button
-            style={{
-              padding: "clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px)", background: "#dc2626",
-              color: "white", fontWeight: 900, borderRadius: "999px",
-              fontSize: "clamp(12px, 2vw, 15px)", textDecoration: "none",
-              boxShadow: "0 8px 30px rgba(220,38,38,0.4)",
-              transition: "background 0.3s ease, transform 0.2s ease",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              cursor: "pointer",
-              border: "none"
-            }}
-            onMouseEnter={e => (e.currentTarget.style.background = "#b91c1c")}
-            onMouseLeave={e => (e.currentTarget.style.background = "#dc2626")}
-          >
+          <button className={styles.primaryCtaButton}>
             <Ambulance className="w-5 h-5" /> Book Ambulance Now
           </button>
           <button
