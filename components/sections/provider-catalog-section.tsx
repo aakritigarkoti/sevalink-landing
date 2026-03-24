@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -12,16 +11,7 @@ import {
   Home,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { PROVIDER_FORM_LINKS } from "@/lib/provider-form-links";
 
 type ProviderRole = {
   id: string;
@@ -35,6 +25,7 @@ type ProviderRole = {
   benefitsTitle: string;
   benefits: string[];
   ctaText: string;
+  formUrl: string;
   icon: LucideIcon;
   iconBg: string;
   imageSrc: string;
@@ -63,7 +54,8 @@ const providers: ProviderRole[] = [
     ],
     benefitsTitle: "Benefits",
     benefits: ["Earn per ride", "Flexible working hours", "Continuous demand"],
-      ctaText: "Join Us",
+    ctaText: "Join as Driver",
+    formUrl: PROVIDER_FORM_LINKS.driverFleet,
     icon: Ambulance,
     iconBg: "from-red-500 to-red-600",
     imageSrc: "/images/5889811436_32ab8f2a07_b.jpg",
@@ -87,7 +79,8 @@ const providers: ProviderRole[] = [
       "Dashboard for managing requests",
       "Better emergency coordination",
     ],
-      ctaText: "Join Us",
+    ctaText: "Get Started",
+    formUrl: PROVIDER_FORM_LINKS.hospital,
     icon: Building2,
     iconBg: "from-blue-600 to-sky-500",
     imageSrc: "/images/hospital-appointment.webp",
@@ -111,7 +104,8 @@ const providers: ProviderRole[] = [
       "Fallback request system when no individual driver is available",
       "Business growth opportunity",
     ],
-      ctaText: "Join Us",
+    ctaText: "Join as Fleet Partner",
+    formUrl: PROVIDER_FORM_LINKS.driverFleet,
     icon: Users,
     iconBg: "from-red-500 to-orange-500",
     imageSrc: "/images/Network_providers.jpg",
@@ -136,7 +130,8 @@ const providers: ProviderRole[] = [
       "Comfort of your home",
       "Personalized attention",
     ],
-      ctaText: "Join Us",
+    ctaText: "Join as Home Care Provider",
+    formUrl: PROVIDER_FORM_LINKS.homecare,
     icon: Home,
     iconBg: "from-green-600 to-emerald-500",
     imageSrc: "/images/nurse.webp",
@@ -147,11 +142,9 @@ const providers: ProviderRole[] = [
 function ProviderSectionBlock({
   provider,
   reverse,
-  onJoin,
 }: {
   provider: ProviderRole;
   reverse: boolean;
-  onJoin: (provider: ProviderRole) => void;
 }) {
   const Icon = provider.icon;
 
@@ -267,14 +260,13 @@ function ProviderSectionBlock({
           </div>
 
           <div className="mt-7 flex flex-wrap gap-4">
-            <button
-              type="button"
-              onClick={() => onJoin(provider)}
+            <a
+              href={provider.formUrl}
               className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-sm font-black uppercase tracking-wide text-white shadow-[0_10px_25px_rgba(220,38,38,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-700"
             >
               {provider.ctaText}
               <ArrowRight className="h-4 w-4" />
-            </button>
+            </a>
           </div>
         </div>
       </motion.div>
@@ -283,42 +275,6 @@ function ProviderSectionBlock({
 }
 
 export function ProviderCatalogSection() {
-  const [open, setOpen] = useState(false);
-  const [activeRole, setActiveRole] = useState<ProviderRole>(providers[0]);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const phoneRef = useRef<HTMLInputElement>(null);
-
-  const sanitizedPhone = useMemo(() => phone.replace(/\D/g, ""), [phone]);
-  const isPhoneValid = sanitizedPhone.length >= 10;
-
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => {
-        phoneRef.current?.focus();
-      }, 30);
-    }
-  }, [open]);
-
-  function openJoinModal(provider: ProviderRole) {
-    setActiveRole(provider);
-    setName("");
-    setPhone("");
-    setSubmitted(false);
-    setOpen(true);
-  }
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!isPhoneValid) {
-      return;
-    }
-
-    setSubmitted(true);
-  }
-
   return (
     <section className="relative overflow-hidden landing-section-spacing">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_10%,rgba(59,130,246,0.18),transparent_40%),radial-gradient(circle_at_84%_16%,rgba(239,68,68,0.14),transparent_40%),linear-gradient(180deg,#f7fbff_0%,#eef6ff_55%,#eaf2fd_100%)]" />
@@ -348,77 +304,10 @@ export function ProviderCatalogSection() {
               key={provider.id}
               provider={provider}
               reverse={index % 2 === 1}
-              onJoin={openJoinModal}
             />
           ))}
         </div>
       </div>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="rounded-2xl border-blue-100 p-0 sm:max-w-md">
-          <div className="rounded-t-2xl bg-gradient-to-r from-blue-600 to-sky-500 px-6 py-5 text-white">
-            <DialogHeader className="text-left">
-              <DialogTitle className="text-xl font-black">Quick Provider Join</DialogTitle>
-              <DialogDescription className="text-blue-100">
-                Share your phone number first. We will contact you quickly for onboarding.
-              </DialogDescription>
-            </DialogHeader>
-          </div>
-
-          <div className="px-6 py-5">
-            {submitted ? (
-              <div className="space-y-3 rounded-xl border border-green-200 bg-green-50 p-4">
-                <p className="text-sm font-black text-green-700">Request Submitted</p>
-                <p className="text-sm text-green-700">
-                  Team SevaLink will contact you on <span className="font-bold">{sanitizedPhone}</span> for role <span className="font-bold">{activeRole.eyebrow}</span>.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="provider-role">Role</Label>
-                  <Input id="provider-role" value={activeRole.eyebrow} readOnly />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="provider-phone">Phone Number (Required)</Label>
-                  <Input
-                    ref={phoneRef}
-                    id="provider-phone"
-                    type="tel"
-                    required
-                    inputMode="numeric"
-                    pattern="[0-9]{10,13}"
-                    placeholder="Enter phone number"
-                    value={phone}
-                    onChange={(event) => setPhone(event.target.value)}
-                    aria-invalid={phone.length > 0 && !isPhoneValid}
-                  />
-                  <p className="text-xs text-slate-500">10-13 digits, used for quick onboarding contact.</p>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="provider-name">Name (Optional)</Label>
-                  <Input
-                    id="provider-name"
-                    placeholder="Enter your name"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="h-10 w-full bg-red-600 font-black uppercase tracking-wide text-white hover:bg-red-700"
-                  disabled={!isPhoneValid}
-                >
-                  Submit Join Request
-                </Button>
-              </form>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 }
