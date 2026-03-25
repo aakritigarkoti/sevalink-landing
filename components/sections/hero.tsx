@@ -15,11 +15,13 @@ const stats = [
 export function HeroSection() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [canUseParallax, setCanUseParallax] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
     const isFinePointer = window.matchMedia("(pointer: fine)").matches;
     const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setReduceMotion(prefersReducedMotion);
     setCanUseParallax(isFinePointer && isDesktop && !prefersReducedMotion);
   }, []);
 
@@ -155,12 +157,12 @@ export function HeroSection() {
               onMouseMove={handleCardPointerMove}
               onMouseLeave={resetCardTilt}
               animate={{
-                y: [0, -10, 0],
+                y: reduceMotion ? 0 : [0, -12, 0],
                 rotateX: tilt.x,
                 rotateY: tilt.y,
               }}
               transition={{
-                y: { duration: 3.6, repeat: Infinity, ease: "easeInOut" },
+                y: { duration: 3.4, repeat: Infinity, ease: "easeInOut" },
                 rotateX: { duration: 0.2, ease: "easeOut" },
                 rotateY: { duration: 0.2, ease: "easeOut" },
               }}
@@ -176,13 +178,24 @@ export function HeroSection() {
               />
 
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                <Image
-                  src="/images/ambulance.png"
-                  alt="Emergency Ambulance"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 48vw"
-                />
+                <motion.div
+                  className="absolute inset-0"
+                  animate={
+                    reduceMotion
+                      ? { scale: 1, x: 0, y: 0 }
+                      : { scale: [1, 1.045, 1], x: [0, 4, 0], y: [0, -3, 0] }
+                  }
+                  transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ willChange: "transform" }}
+                >
+                  <Image
+                    src="/images/ambulance.png"
+                    alt="Emergency Ambulance"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 48vw"
+                  />
+                </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-br from-red-100/20 to-orange-100/20" />
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50/90 border border-green-200 backdrop-blur-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />

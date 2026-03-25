@@ -18,6 +18,7 @@ type ServiceItem = {
   description: string;
   iconBg: string;
   iconText: string;
+  role?: "patient" | "driver" | "fleet" | "hospital";
 };
 
 const services: ServiceItem[] = [
@@ -27,6 +28,7 @@ const services: ServiceItem[] = [
     description: "Nearest BLS/ALS ambulance dispatched within minutes, 24/7.",
     iconBg: "bg-red-50",
     iconText: "text-red-600",
+    role: "patient",
   },
   {
     icon: MapPin,
@@ -34,6 +36,7 @@ const services: ServiceItem[] = [
     description: "Live GPS tracking from dispatch to hospital arrival.",
     iconBg: "bg-blue-50",
     iconText: "text-blue-600",
+    role: "driver",
   },
   {
     icon: Hospital,
@@ -41,6 +44,7 @@ const services: ServiceItem[] = [
     description: "AI-powered hospital matching based on emergency type.",
     iconBg: "bg-green-50",
     iconText: "text-green-600",
+    role: "hospital",
   },
   {
     icon: Users,
@@ -48,6 +52,7 @@ const services: ServiceItem[] = [
     description: "Share live location and updates with family in real time.",
     iconBg: "bg-purple-50",
     iconText: "text-purple-600",
+    role: "fleet",
   },
   {
     icon: Brain,
@@ -67,9 +72,47 @@ const services: ServiceItem[] = [
 
 export default function ServicesSection() {
   const [activeCardId, setActiveCardId] = useState<string | null>(services[0]?.title ?? null);
+  const [highlightedRole, setHighlightedRole] = useState<string | null>(null);
+  const clearHighlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const onFocusRole = (event: Event) => {
+      const customEvent = event as CustomEvent<{ role?: string; targetCardId?: string }>;
+      const role = customEvent.detail?.role;
+      if (!role) return;
+
+      const targetCardId = customEvent.detail?.targetCardId ?? `service-${role}`;
+      const targetCard = document.getElementById(targetCardId);
+
+      if (targetCard) {
+        requestAnimationFrame(() => {
+          targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      }
+
+      setHighlightedRole(role);
+
+      if (clearHighlightTimerRef.current) {
+        clearTimeout(clearHighlightTimerRef.current);
+      }
+
+      clearHighlightTimerRef.current = setTimeout(() => {
+        setHighlightedRole(null);
+      }, 1800);
+    };
+
+    window.addEventListener("sevalink:focus-service-role", onFocusRole);
+    return () => {
+      window.removeEventListener("sevalink:focus-service-role", onFocusRole);
+      if (clearHighlightTimerRef.current) {
+        clearTimeout(clearHighlightTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section id="services" className="w-full min-h-fit landing-section-spacing overflow-hidden bg-gradient-to-b from-[#FFF0E2] to-[#FFE7D2] scroll-smooth">
+      <div id="services-section" aria-hidden="true" className="h-0 w-0" />
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="mb-3 inline-block rounded-full bg-red-600/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-red-600 sm:mb-4 sm:px-5 sm:py-2 sm:text-xs">
@@ -90,6 +133,7 @@ export default function ServicesSection() {
               service={service} 
               index={index}
               isActive={activeCardId === service.title}
+              isRoleHighlighted={highlightedRole === service.role}
               onIntersect={setActiveCardId}
             />
           ))}
@@ -103,15 +147,18 @@ function ServiceCard({
   service, 
   index, 
   isActive, 
+  isRoleHighlighted,
   onIntersect 
 }: { 
   service: ServiceItem; 
   index: number;
   isActive: boolean;
+  isRoleHighlighted: boolean;
   onIntersect: (id: string | null) => void;
 }) {
   const Icon = service.icon;
   const cardRef = useRef<HTMLElement>(null);
+  const cardId = service.role ? `service-${service.role}` : `service-card-${index}`;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -136,8 +183,14 @@ function ServiceCard({
 
   return (
     <article 
+      id={cardId}
+      data-role={service.role ?? "none"}
       ref={cardRef}
       className={`service-card rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-6 ${
+        isRoleHighlighted
+          ? "scale-[1.05] border-red-300 ring-2 ring-red-200 shadow-[0_0_0_4px_rgba(239,68,68,0.12),0_16px_26px_rgba(239,68,68,0.18)]"
+          : ""
+      } ${
         isActive ? "service-card--active" : "service-card--inactive"
       }`}
     >

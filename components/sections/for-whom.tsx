@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import Link from "next/link";
 import { HeartPulse, Building2, LayoutGrid, Check, Home } from "lucide-react";
 
 type Audience = {
@@ -10,7 +9,6 @@ type Audience = {
   image: string;
   features: string[];
   color: string;
-  href: string;
 };
 
 const audiences: Audience[] = [
@@ -21,7 +19,6 @@ const audiences: Audience[] = [
     image: "/images/Individuals&Family.jpg",
     features: ["Book ambulance", "Track ambulance", "View hospitals"],
     color: "bg-red-600",
-    href: "/services",
   },
   {
     id: "driver",
@@ -30,7 +27,6 @@ const audiences: Audience[] = [
     image: "/images/Hospital_Partners.jpg",
     features: ["Accept rides", "Manage trips", "Live status updates"],
     color: "bg-red-600",
-    href: "/provider",
   },
   {
     id: "fleet",
@@ -39,7 +35,6 @@ const audiences: Audience[] = [
     image: "/images/Network_providers.jpg",
     features: ["Manage vehicles", "Track performance", "Monitor drivers"],
     color: "bg-red-600",
-    href: "/provider",
   },
   {
     id: "hospital",
@@ -48,13 +43,37 @@ const audiences: Audience[] = [
     image: "/images/doctor.jpg",
     features: ["Manage bookings", "Patient coordination", "Care team sync"],
     color: "bg-red-600",
-    href: "/services",
   },
 ];
+
+const roleTargetMap: Record<string, { sectionId: string; cardId: string }> = {
+  patient: { sectionId: "services-section", cardId: "service-patient" },
+  driver: { sectionId: "services-section", cardId: "service-driver" },
+  fleet: { sectionId: "services-section", cardId: "service-fleet" },
+  hospital: { sectionId: "services-section", cardId: "service-hospital" },
+};
 
 export function ForWhomSection() {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+
+  const handleLearnMore = (role: string) => {
+    const targetConfig = roleTargetMap[role] ?? { sectionId: "services-section", cardId: "" };
+    const targetCard = targetConfig.cardId ? document.getElementById(targetConfig.cardId) : null;
+    const targetSection = document.getElementById(targetConfig.sectionId);
+
+    if (targetCard) {
+      targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      targetSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("sevalink:focus-service-role", {
+        detail: { role, targetSectionId: targetConfig.sectionId, targetCardId: targetConfig.cardId },
+      })
+    );
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -135,12 +154,13 @@ export function ForWhomSection() {
                     </div>
                   ))}
                 </div>
-                <Link
-                  href={item.href}
+                <button
+                  type="button"
+                  onClick={() => handleLearnMore(item.id)}
                   className="w-full mt-6 sm:mt-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-red-600 !text-white visited:!text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center flex-shrink-0 transition-colors hover:bg-red-700 hover:!text-white active:!text-white cursor-pointer"
                 >
                   Learn More
-                </Link>
+                </button>
               </div>
             </div>
           ))}

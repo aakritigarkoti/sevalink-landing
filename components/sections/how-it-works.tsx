@@ -27,7 +27,7 @@ function MapScreen() {
   return (
     <div className="relative isolate w-full h-full overflow-hidden rounded-2xl bg-gray-100">
       {/* Top overlays - always visible above map layers */}
-      <div className="absolute top-2 left-2 right-2 z-20 flex items-center pointer-events-none">
+      <div className="absolute top-2 left-2 right-2 z-[1200] flex items-center pointer-events-none">
         <div className="inline-flex items-center gap-1.5 rounded-full bg-white/95 border border-white/50 px-3 py-1.5 shadow-lg shadow-black/10 backdrop-blur-sm">
           <motion.div
             className="w-1.5 h-1.5 rounded-full bg-red-600"
@@ -54,7 +54,7 @@ function MapScreen() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="absolute bottom-0 left-0 right-0 p-3 bg-white/97 backdrop-blur-sm border-t border-gray-100 z-20"
+        className="absolute bottom-0 left-0 right-0 p-3 bg-white/97 backdrop-blur-sm border-t border-gray-100 z-[1200]"
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -62,12 +62,12 @@ function MapScreen() {
               <Ambulance size={14} color="#DC2626" />
             </div>
             <div>
-              <p className="text-[10px] font-black text-gray-900 leading-none">Ambulance En Route</p>
-              <p className="text-[9px] text-gray-500 mt-1">1.2 km away</p>
+              <p className="text-[10px] font-black text-gray-900 leading-none">Ambulance will reach</p>
+              <p className="text-[9px] text-gray-500 mt-1">in 5 min</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-xs font-black text-red-600 leading-none">4 min</p>
+            <p className="text-xs font-black text-red-600 leading-none">5 min</p>
             <p className="text-[8px] text-gray-400 mt-1 uppercase">ETA</p>
           </div>
         </div>
