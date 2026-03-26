@@ -58,7 +58,7 @@ const providers: ProviderRole[] = [
     formUrl: PROVIDER_FORM_LINKS.driverFleet,
     icon: Ambulance,
     iconBg: "from-red-500 to-red-600",
-    imageSrc: "/images/5889811436_32ab8f2a07_b.jpg",
+    imageSrc: "/images/driver-card.jpeg",
     imageAlt: "Ambulance driver ready for emergency duty",
   },
   {
@@ -83,7 +83,7 @@ const providers: ProviderRole[] = [
     formUrl: PROVIDER_FORM_LINKS.hospital,
     icon: Building2,
     iconBg: "from-blue-600 to-sky-500",
-    imageSrc: "/images/hospital-appointment.webp",
+    imageSrc: "/images/Hospital_Partners.jpg",
     imageAlt: "Hospital operations and emergency coordination team",
   },
   {
@@ -108,7 +108,7 @@ const providers: ProviderRole[] = [
     formUrl: PROVIDER_FORM_LINKS.driverFleet,
     icon: Users,
     iconBg: "from-red-500 to-orange-500",
-    imageSrc: "/images/Network_providers.jpg",
+    imageSrc: "/images/fleet.webp",
     imageAlt: "Fleet operations dashboard and dispatch planning",
   },
   {
@@ -276,7 +276,7 @@ function ProviderSectionBlock({
 
 export function ProviderCatalogSection() {
   return (
-    <section className="relative overflow-hidden landing-section-spacing">
+    <section id="provider-section" className="relative overflow-hidden landing-section-spacing">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_10%,rgba(59,130,246,0.18),transparent_40%),radial-gradient(circle_at_84%_16%,rgba(239,68,68,0.14),transparent_40%),linear-gradient(180deg,#f7fbff_0%,#eef6ff_55%,#eaf2fd_100%)]" />
 
       <div className="mx-auto max-w-7xl">

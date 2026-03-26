@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle, Star, Shield, Award } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 type TrustItem = {
   icon: typeof CheckCircle;

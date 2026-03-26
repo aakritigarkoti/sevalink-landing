@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/sections/hero";
@@ -10,16 +13,23 @@ import { GetStartedSection } from "@/components/sections/get-started-section";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { FinalCTASection } from "@/components/sections/final-cta-section";
+import { ServiceModeToggle } from "@/components/sections/service-mode-toggle";
+import { HomeCareServicesSection } from "@/components/sections/home-care-services-section";
+import { DualCTASection } from "@/components/sections/dual-cta-section";
 
 export default function Home() {
+  const [activeMode, setActiveMode] = useState<"emergency" | "homecare">("emergency");
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF3E0" }}>
       {/* Top Navigation */}
       <Header />
 
       <main>
+        <ServiceModeToggle activeTab={activeMode} onChange={setActiveMode} />
+
         {/* 1. Main Banner */}
-        <HeroSection />
+        <HeroSection mode={activeMode} />
 
         {/* 3. Detailed Services (Neon/Animated Cards) */}
         <ServicesSection />
@@ -32,6 +42,9 @@ export default function Home() {
 
         {/* 6. Key Differentiators (8 Points & Image) */}
         <WhySevaLink />
+
+        {/* 6.5 Home Care Services */}
+        <HomeCareServicesSection />
 
         {/* 7. Social Proof (City-wise Filters) */}
         <TestimonialsSection />
@@ -47,6 +60,9 @@ export default function Home() {
 
         {/* 11. Final CTA */}
         <FinalCTASection />
+
+        {/* 12. Emergency & Home Care CTA */}
+        <DualCTASection />
       </main>
 
       {/* Global Footer */}

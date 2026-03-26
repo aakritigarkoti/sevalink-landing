@@ -93,9 +93,16 @@ function ServiceShowcaseBlock({
   reverse: boolean;
 }) {
   const Icon = service.icon;
+  const anchorId =
+    service.id === "ambulance"
+      ? "ambulance-services"
+      : service.id === "homecare"
+        ? "homecare-services"
+        : undefined;
 
   return (
     <section id={service.id} className="scroll-mt-28">
+      {anchorId ? <div id={anchorId} className="relative -top-28" /> : null}
       <motion.div
         initial={{ opacity: 0, y: 26 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -175,7 +182,7 @@ function ServiceShowcaseBlock({
 
 export function ServicesCatalogSection() {
   return (
-    <section className="relative overflow-hidden landing-section-spacing">
+    <section id="services-section" className="relative overflow-hidden landing-section-spacing">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_10%,rgba(59,130,246,0.18),transparent_40%),radial-gradient(circle_at_84%_16%,rgba(239,68,68,0.14),transparent_40%),linear-gradient(180deg,#f7fbff_0%,#eef6ff_55%,#eaf2fd_100%)]" />
 
       <div className="mx-auto max-w-7xl scroll-smooth">

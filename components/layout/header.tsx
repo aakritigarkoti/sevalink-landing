@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Ambulance, Menu } from "lucide-react";
+import { Ambulance, HousePlus, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,9 +34,9 @@ export const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16 md:h-18">
+        <div className="relative flex items-center justify-between h-16 md:h-18">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <Image
@@ -50,7 +50,7 @@ export const Header = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1 md:absolute md:left-1/2 md:-translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -65,13 +65,20 @@ export const Header = () => {
           </nav>
 
           {/* CTA - Desktop */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-3">
             <Link
               href="/#services"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-red-600 !text-white visited:!text-white hover:!text-white active:!text-white text-sm font-semibold hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl cursor-pointer border-none"
             >
               <Ambulance className="w-4 h-4" />
               Book Ambulance
+            </Link>
+            <Link
+              href="/services#homecare"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-600 !text-white visited:!text-white hover:!text-white active:!text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-lg hover:shadow-xl cursor-pointer border-none"
+            >
+              <HousePlus className="w-4 h-4" />
+              Book Home Care
             </Link>
           </div>
 
@@ -125,6 +132,14 @@ export const Header = () => {
                     >
                       <Ambulance className="w-5 h-5" />
                       Book Ambulance
+                    </Link>
+                    <Link
+                      href="/services#homecare"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-emerald-600 !text-white visited:!text-white hover:!text-white active:!text-white text-base font-semibold hover:bg-emerald-700 hover:shadow-lg transition-all text-center cursor-pointer border-none"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <HousePlus className="w-5 h-5" />
+                      Book Home Care
                     </Link>
                   </div>
                 </nav>

@@ -1,5 +1,6 @@
 "use client";
 import { Check } from "lucide-react";
+import Image from "next/image";
 import { FloatingMedicalIcons } from "@/components/ui/medical-background";
 import { useRef, useEffect, useState } from "react";
 
@@ -97,10 +98,13 @@ export function WhySevaLink() {
         {/* Right Doctor Image */}
         <div className="flex-1 relative w-full">
           <div className={`ws-image relative z-10 rounded-2xl sm:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] border-4 sm:border-[12px] border-white bg-gray-100 ${visible ? "show" : ""}`}>
-            <img
+            <Image
               src="/images/doctor.jpg"
               alt="Expert Doctor"
+              width={1200}
+              height={900}
               className="w-full h-auto object-cover scale-105"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
 

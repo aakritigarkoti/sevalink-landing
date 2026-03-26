@@ -63,7 +63,7 @@ export function ServiceFeaturesSection({
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
         >
-          {features.map((feature, index) => {
+          {features.map((feature) => {
             const Icon = feature.icon;
             return (
               <motion.div

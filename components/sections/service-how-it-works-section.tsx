@@ -69,7 +69,6 @@ export function ServiceHowItWorksSection({
           className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"
         >
           {steps.map((step, index) => {
-            const Icon = step.icon;
             return (
               <motion.div
                 key={step.number}

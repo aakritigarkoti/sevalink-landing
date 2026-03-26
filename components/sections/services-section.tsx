@@ -3,11 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import {
   Ambulance,
-  Brain,
+  Stethoscope,
   MapPin,
-  Hospital,
-  Users,
-  CreditCard,
+  Building2,
+  HousePlus,
+  IndianRupee,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./services-section.css";
@@ -18,6 +18,7 @@ type ServiceItem = {
   description: string;
   iconBg: string;
   iconText: string;
+  badge?: string;
   role?: "patient" | "driver" | "fleet" | "hospital";
 };
 
@@ -25,48 +26,50 @@ const services: ServiceItem[] = [
   {
     icon: Ambulance,
     title: "Emergency Ambulance",
-    description: "Nearest BLS/ALS ambulance dispatched within minutes, 24/7.",
+    description: "Fastest ambulance dispatch with GPS tracking and certified paramedics.",
     iconBg: "bg-red-50",
-    iconText: "text-red-600",
+    iconText: "text-red-500",
     role: "patient",
   },
   {
     icon: MapPin,
     title: "Real-Time Tracking",
-    description: "Live GPS tracking from dispatch to hospital arrival.",
-    iconBg: "bg-blue-50",
-    iconText: "text-blue-600",
+    description: "Track your ambulance or caregiver live on map from booking to arrival.",
+    iconBg: "bg-red-50",
+    iconText: "text-red-500",
     role: "driver",
   },
   {
-    icon: Hospital,
+    icon: Building2,
     title: "Hospital Selection",
-    description: "AI-powered hospital matching based on emergency type.",
-    iconBg: "bg-green-50",
-    iconText: "text-green-600",
+    description: "Choose the nearest or preferred hospital - we handle the rest.",
+    iconBg: "bg-red-50",
+    iconText: "text-red-500",
     role: "hospital",
   },
   {
-    icon: Users,
-    title: "Family Tracking",
-    description: "Share live location and updates with family in real time.",
-    iconBg: "bg-purple-50",
-    iconText: "text-purple-600",
+    icon: HousePlus,
+    title: "Nurse at Home",
+    description: "Trained nurses for wound care, injections, post-surgery & elderly care.",
+    iconBg: "bg-green-50",
+    iconText: "text-green-500",
+    badge: "New",
     role: "fleet",
   },
   {
-    icon: Brain,
-    title: "BLS/ALS & ICU/Neo",
-    description: "Specialized ambulances with trained paramedics for critical care.",
-    iconBg: "bg-amber-50",
-    iconText: "text-amber-600",
+    icon: Stethoscope,
+    title: "Doctor Home Visit",
+    description: "Verified doctors visit your home for check-ups and consultations.",
+    iconBg: "bg-green-50",
+    iconText: "text-green-500",
+    badge: "New",
   },
   {
-    icon: CreditCard,
+    icon: IndianRupee,
     title: "Transparent Pricing",
-    description: "No hidden charges. Know the cost before ambulance arrives.",
-    iconBg: "bg-cyan-50",
-    iconText: "text-cyan-600",
+    description: "No hidden charges. Know the cost before you book, every time.",
+    iconBg: "bg-red-50",
+    iconText: "text-red-500",
   },
 ];
 
@@ -119,10 +122,10 @@ export default function ServicesSection() {
             Our Services
           </span>
           <h2 className="text-2xl font-black leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-6xl">
-            Everything You Need <span className="text-red-600 italic">in a Crisis</span>
+            Everything You Need <span className="text-red-600 italic">in a Crisis</span> <span className="text-gray-900 italic">& Beyond</span>
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-xs leading-relaxed text-gray-500 sm:mt-4 sm:text-base lg:text-lg">
-            Core services in a simple, fast layout designed for smooth browsing.
+            From emergency response to long-term home care - one platform for all your healthcare needs.
           </p>
         </div>
 
@@ -186,7 +189,7 @@ function ServiceCard({
       id={cardId}
       data-role={service.role ?? "none"}
       ref={cardRef}
-      className={`service-card rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-6 ${
+      className={`service-card relative rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-6 ${
         isRoleHighlighted
           ? "scale-[1.05] border-red-300 ring-2 ring-red-200 shadow-[0_0_0_4px_rgba(239,68,68,0.12),0_16px_26px_rgba(239,68,68,0.18)]"
           : ""
@@ -194,6 +197,12 @@ function ServiceCard({
         isActive ? "service-card--active" : "service-card--inactive"
       }`}
     >
+      {service.badge ? (
+        <span className="absolute right-3 top-[-9px] inline-flex items-center rounded-full bg-green-500 px-2 py-1 text-xs font-bold text-white">
+          {service.badge}
+        </span>
+      ) : null}
+
       <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${service.iconBg}`}>
         <Icon className={`h-5 w-5 ${service.iconText}`} strokeWidth={2} />
       </div>

@@ -1,5 +1,7 @@
-"use client";
+'use client';
 import { useRef, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { HeartPulse, Building2, LayoutGrid, Check, Home } from "lucide-react";
 
 type Audience = {
@@ -16,7 +18,7 @@ const audiences: Audience[] = [
     id: "patient",
     title: "Patient",
     icon: HeartPulse,
-    image: "/images/Individuals&Family.jpg",
+    image: "/images/patient.jpg",
     features: ["Book ambulance", "Track ambulance", "View hospitals"],
     color: "bg-red-600",
   },
@@ -24,7 +26,7 @@ const audiences: Audience[] = [
     id: "driver",
     title: "Driver",
     icon: Building2,
-    image: "/images/Hospital_Partners.jpg",
+    image: "/images/driver-card.jpeg",
     features: ["Accept rides", "Manage trips", "Live status updates"],
     color: "bg-red-600",
   },
@@ -32,40 +34,48 @@ const audiences: Audience[] = [
     id: "fleet",
     title: "Fleet",
     icon: LayoutGrid,
-    image: "/images/Network_providers.jpg",
+    image: "/images/fleet.webp",
     features: ["Manage vehicles", "Track performance", "Monitor drivers"],
     color: "bg-red-600",
   },
   {
     id: "hospital",
-    title: "Hospital / Homecare",
+    title: "Homecare",
     icon: Home,
-    image: "/images/doctor.jpg",
+    image: "/images/homecare.avif",
     features: ["Manage bookings", "Patient coordination", "Care team sync"],
-    color: "bg-red-600",
+    color: "bg-green-600",
   },
 ];
 
-const roleTargetMap: Record<string, { sectionId: string; cardId: string }> = {
-  patient: { sectionId: "services-section", cardId: "service-patient" },
-  driver: { sectionId: "services-section", cardId: "service-driver" },
-  fleet: { sectionId: "services-section", cardId: "service-fleet" },
-  hospital: { sectionId: "services-section", cardId: "service-hospital" },
+const roleTargetMap: Record<string, { page?: string; sectionId: string; cardId: string }> = {
+  patient: { page: "/services", sectionId: "services-section", cardId: "ambulance" },
+  driver: { page: "/provider", sectionId: "provider-section", cardId: "driver" },
+  fleet: { page: "/provider", sectionId: "provider-section", cardId: "fleet" },
+  hospital: { page: "/services", sectionId: "services-section", cardId: "homecare" },
 };
 
 export function ForWhomSection() {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const router = useRouter();
 
   const handleLearnMore = (role: string) => {
-    const targetConfig = roleTargetMap[role] ?? { sectionId: "services-section", cardId: "" };
-    const targetCard = targetConfig.cardId ? document.getElementById(targetConfig.cardId) : null;
-    const targetSection = document.getElementById(targetConfig.sectionId);
-
-    if (targetCard) {
-      targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    const targetConfig = roleTargetMap[role] ?? { page: "/services", sectionId: "services-section", cardId: "" };
+    
+    // If target is on a different page, navigate and use hash
+    if (targetConfig.page) {
+      router.push(`${targetConfig.page}#${targetConfig.cardId}`);
     } else {
-      targetSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Try to scroll to card on current page
+      const targetCard = targetConfig.cardId ? document.getElementById(targetConfig.cardId) : null;
+      const targetSection = document.getElementById(targetConfig.sectionId);
+
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        targetSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
     window.dispatchEvent(
@@ -116,22 +126,37 @@ export function ForWhomSection() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8 items-stretch">
-          {audiences.map((item, i) => (
+          {audiences.map((item, i) => {
+            const isHomecareCard = item.id === "hospital";
+
+            return (
             <div
               key={item.id}
-              className="group bg-white rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-xl border border-orange-100/50 flex flex-col cursor-pointer hover:shadow-2xl transition-shadow duration-300"
+              className={`group relative bg-white rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-xl border flex flex-col cursor-pointer transition-all duration-300 ${
+                isHomecareCard
+                  ? "border-2 border-green-500 shadow-lg hover:scale-105 hover:shadow-2xl"
+                  : "border-orange-100/50 hover:shadow-2xl"
+              }`}
               style={{
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(30px)",
                 transition: `opacity 0.5s ease ${i * 0.1 + 0.2}s, transform 0.5s ease ${i * 0.1 + 0.2}s`,
               }}
             >
+              {isHomecareCard ? (
+                <span className="absolute top-3 left-3 z-20 rounded-full bg-green-500 px-3 py-1 text-[10px] sm:text-xs font-black tracking-wide text-white">
+                  ★ Featured Service
+                </span>
+              ) : null}
+
               {/* Image Header */}
               <div className="relative h-48 sm:h-56 w-full flex-shrink-0">
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 flex items-center gap-3 sm:gap-4">
@@ -157,13 +182,15 @@ export function ForWhomSection() {
                 <button
                   type="button"
                   onClick={() => handleLearnMore(item.id)}
-                  className="w-full mt-6 sm:mt-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-red-600 !text-white visited:!text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center flex-shrink-0 transition-colors hover:bg-red-700 hover:!text-white active:!text-white cursor-pointer"
+                  className={`w-full mt-6 sm:mt-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl !text-white visited:!text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center flex-shrink-0 transition-colors hover:!text-white active:!text-white cursor-pointer ${
+                    isHomecareCard ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"
+                  }`}
                 >
                   Learn More
                 </button>
               </div>
             </div>
-          ))}
+          )})}
         </div>
 
       </div>

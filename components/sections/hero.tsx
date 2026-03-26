@@ -3,19 +3,29 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin, Clock, Shield, Download } from "lucide-react";
+import { MapPin, Clock, Shield, Download } from "lucide-react";
 import { FloatingMedicalIcons } from "../ui/medical-background";
 
-const stats = [
+const emergencyStats = [
   { icon: Clock, value: "10 min", label: "Avg Response" },
-  { icon: MapPin, value: "500+", label: "Cities Covered" },
   { icon: Shield, value: "24/7", label: "Always Available" },
 ];
 
-export function HeroSection() {
+const homecareStats = [
+  { icon: MapPin, value: "At Home", label: "Care Visits" },
+  { icon: Shield, value: "24/7", label: "Verified Care" },
+];
+
+type HeroSectionProps = {
+  mode?: "emergency" | "homecare";
+};
+
+export function HeroSection({ mode = "emergency" }: HeroSectionProps) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [canUseParallax, setCanUseParallax] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const isHomecareMode = mode === "homecare";
+  const activeStats = isHomecareMode ? homecareStats : emergencyStats;
 
   useEffect(() => {
     const isFinePointer = window.matchMedia("(pointer: fine)").matches;
@@ -80,14 +90,25 @@ export function HeroSection() {
             </motion.div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5 text-gray-900">
-              Every Second{" "}
-              <span className="text-red-600">Matters</span>
-              <br />
-              In An Emergency
+              {isHomecareMode ? (
+                <>
+                  Professional <span className="text-emerald-600">Care</span>{" "}
+                  <span className="text-red-600">At Your Doorstep</span>
+                </>
+              ) : (
+                <>
+                  Every Second{" "}
+                  <span className="text-red-600">Matters</span>
+                  <br />
+                  In An Emergency
+                </>
+              )}
             </h1>
 
             <p className="text-lg text-gray-600 leading-relaxed mb-6 max-w-md">
-              Book an ambulance in under 30 seconds. SevaLink connects you to the nearest verified ambulance with real-time tracking.
+              {isHomecareMode
+                ? "From nursing care to elderly support and doctor home visits - quality healthcare delivered to your home by verified professionals."
+                : "Book an ambulance in under 30 seconds. SevaLink connects you to the nearest verified ambulance with real-time tracking."}
             </p>
 
             <motion.div
@@ -100,19 +121,24 @@ export function HeroSection() {
                 <button
                   type="button"
                   onClick={handleScrollToAppDownload}
-                  className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl px-8 text-base font-semibold text-white shadow-[0_14px_30px_rgba(220,38,38,0.35)]"
+                  className={`group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-xl px-8 text-base font-semibold text-white shadow-md ${
+                    isHomecareMode ? "bg-emerald-600 hover:bg-emerald-700" : "shadow-[0_14px_30px_rgba(220,38,38,0.35)]"
+                  }`}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-red-700 transition-colors duration-200 group-hover:from-red-700 group-hover:via-red-600 group-hover:to-red-800" />
-                  <motion.span
-                    aria-hidden
-                    className="absolute -left-16 top-0 h-full w-16 bg-white/25 blur-md"
-                    animate={{ x: [0, 260, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  />
+                  {!isHomecareMode ? (
+                    <>
+                      <span className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-red-700 transition-colors duration-200 group-hover:from-red-700 group-hover:via-red-600 group-hover:to-red-800" />
+                      <motion.span
+                        aria-hidden
+                        className="absolute -left-16 top-0 h-full w-16 bg-white/25 blur-md"
+                        animate={{ x: [0, 260, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                    </>
+                  ) : null}
                   <span className="relative z-10 inline-flex items-center gap-2 text-white">
                     <Download className="h-5 w-5" />
                     Install App
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
                 </button>
               </motion.div>
@@ -124,7 +150,7 @@ export function HeroSection() {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="flex gap-5 sm:gap-6"
             >
-              {stats.map(({ icon: Icon, value, label }) => (
+              {activeStats.map(({ icon: Icon, value, label }) => (
                 <div key={label} className="flex items-start gap-2.5">
                   <div className="mt-0.5 w-8 h-8 rounded-lg bg-white/80 backdrop-blur-sm flex items-center justify-center shrink-0 shadow-sm">
                     <Icon className="w-4 h-4 text-red-600" />
@@ -157,12 +183,14 @@ export function HeroSection() {
               onMouseMove={handleCardPointerMove}
               onMouseLeave={resetCardTilt}
               animate={{
-                y: reduceMotion ? 0 : [0, -12, 0],
+                y: reduceMotion || isHomecareMode ? 0 : [0, -12, 0],
                 rotateX: tilt.x,
                 rotateY: tilt.y,
               }}
               transition={{
-                y: { duration: 3.4, repeat: Infinity, ease: "easeInOut" },
+                y: isHomecareMode
+                  ? { duration: 0 }
+                  : { duration: 3.4, repeat: Infinity, ease: "easeInOut" },
                 rotateX: { duration: 0.2, ease: "easeOut" },
                 rotateY: { duration: 0.2, ease: "easeOut" },
               }}
@@ -189,59 +217,65 @@ export function HeroSection() {
                   style={{ willChange: "transform" }}
                 >
                   <Image
-                    src="/images/ambulance.png"
-                    alt="Emergency Ambulance"
+                    src={isHomecareMode ? "/images/homecare.avif" : "/images/ambulance.png"}
+                    alt={isHomecareMode ? "Professional home care service" : "Emergency Ambulance"}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 48vw"
                   />
                 </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-br from-red-100/20 to-orange-100/20" />
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50/90 border border-green-200 backdrop-blur-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs font-semibold text-green-700">ETA: 10 min</span>
-                </div>
+                {!isHomecareMode ? (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50/90 border border-green-200 backdrop-blur-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-xs font-semibold text-green-700">ETA: 10 min</span>
+                  </div>
+                ) : null}
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-                className="absolute -left-6 top-1/3 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg hidden md:block"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="relative w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
-                    <motion.span
-                      aria-hidden
-                      className="absolute inset-0 rounded-full bg-red-400/45"
-                      animate={{ scale: [1, 1.75], opacity: [0.55, 0] }}
-                      transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
-                    />
-                    <MapPin className="w-4 h-4 text-red-600" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-gray-900">Live Tracking</div>
-                    <div className="text-[10px] text-gray-600">GPS enabled</div>
-                  </div>
-                </div>
-              </motion.div>
+              {!isHomecareMode ? (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.8, duration: 0.5 }}
+                    className="absolute -left-6 top-1/3 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg hidden md:block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="relative w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                        <motion.span
+                          aria-hidden
+                          className="absolute inset-0 rounded-full bg-red-400/45"
+                          animate={{ scale: [1, 1.75], opacity: [0.55, 0] }}
+                          transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+                        />
+                        <MapPin className="w-4 h-4 text-red-600" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-gray-900">Live Tracking</div>
+                        <div className="text-[10px] text-gray-600">GPS enabled</div>
+                      </div>
+                    </div>
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1, duration: 0.5 }}
-                className="absolute -right-4 bottom-1/4 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg hidden md:block"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                    <Shield className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-gray-900">Verified</div>
-                    <div className="text-[10px] text-gray-600">All ambulances</div>
-                  </div>
-                </div>
-              </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                    className="absolute -right-4 bottom-1/4 bg-white/90 backdrop-blur-md border border-white rounded-xl p-3 shadow-lg hidden md:block"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                        <Shield className="w-4 h-4 text-green-600" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-gray-900">Verified</div>
+                        <div className="text-[10px] text-gray-600">All ambulances</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </>
+              ) : null}
             </motion.div>
           </motion.div>
         </div>
