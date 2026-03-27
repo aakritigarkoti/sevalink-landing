@@ -36,15 +36,15 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="relative flex items-center justify-between h-16 sm:h-20 md:h-24">
+        <div className="relative flex items-center justify-between h-[4.5rem] sm:h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <Image
               src="/assets/brand/SevaLink-logo-r.png"
               alt="SevaLink"
-              width={360}
-              height={90}
-              className="h-16 sm:h-16 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+              width={400}
+              height={100}
+              className="h-[4.5rem] sm:h-16 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
               priority
             />
           </Link>
@@ -103,9 +103,9 @@ export const Header = () => {
                     <Image
                       src="/assets/brand/SevaLink-logo-r.png"
                       alt="SevaLink"
-                      width={360}
-                      height={90}
-                      className="h-16 sm:h-16 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+                      width={400}
+                      height={100}
+                      className="h-[4.5rem] sm:h-16 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
                     />
                   </Link>
                 </div>
