@@ -58,7 +58,7 @@ export function HeroSection({ mode = "emergency" }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative overflow-hidden pt-12 md:pt-14">
+    <section className="relative overflow-hidden mt-0 pt-0 sm:pt-6 md:pt-12">
       {/* Minimal healthcare background with floating icons */}
       <FloatingMedicalIcons />
 
@@ -70,7 +70,7 @@ export function HeroSection({ mode = "emergency" }: HeroSectionProps) {
         backgroundSize: '32px 32px',
       }} />
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 md:py-10 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-5 md:py-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left content */}
           <motion.div
@@ -93,7 +93,7 @@ export function HeroSection({ mode = "emergency" }: HeroSectionProps) {
               {isHomecareMode ? (
                 <>
                   Professional <span className="text-emerald-600">Care</span>{" "}
-                  <span className="text-red-600">At Your Doorstep</span>
+                  <span className="text-black">At Your Doorstep</span>
                 </>
               ) : (
                 <>

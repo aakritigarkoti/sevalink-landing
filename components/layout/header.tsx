@@ -36,15 +36,15 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="relative flex items-center justify-between h-16 md:h-18">
+        <div className="relative flex items-center justify-between h-16 sm:h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <Image
               src="/assets/brand/SevaLink-logo-r.png"
               alt="SevaLink"
-              width={240}
-              height={56}
-              className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+              width={320}
+              height={80}
+              className="h-11 sm:h-14 md:h-18 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
               priority
             />
           </Link>
@@ -98,14 +98,16 @@ export const Header = () => {
                 <SheetTitle>Navigation Menu</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col h-full">
-                <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                  <Image
-                    src="/assets/brand/SevaLink-icon.png"
-                    alt="SevaLink Icon"
-                    width={32}
-                    height={32}
-                    className="h-8 w-8 object-contain"
-                  />
+                <div className="p-6 border-b border-gray-100 flex items-center">
+                  <Link href="/" className="flex items-center gap-2 group cursor-pointer" onClick={() => setMobileOpen(false)}>
+                    <Image
+                      src="/assets/brand/SevaLink-logo-r.png"
+                      alt="SevaLink"
+                      width={320}
+                      height={80}
+                      className="h-11 sm:h-14 md:h-18 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+                    />
+                  </Link>
                 </div>
                 
                 <nav className="p-6 flex flex-col gap-2">

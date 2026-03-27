@@ -98,7 +98,6 @@ function StepCard({ step, align }: { step: typeof steps[0]; align: "left" | "rig
         <Icon size={24} color="white" />
       </motion.div>
       <div>
-        <p className="text-[10px] sm:text-[11px] font-black text-red-600 tracking-widest uppercase mb-1.5">Step {step.id}</p>
         <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight mb-3">{step.title}</h3>
         <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{step.description}</p>
       </div>

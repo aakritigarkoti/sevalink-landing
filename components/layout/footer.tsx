@@ -52,13 +52,13 @@ export const Footer = () => {
             
             {/* Column 1: Brand + About */}
             <div>
-              <Link href="/" className="inline-block mb-4">
+              <Link href="/" className="inline-flex items-center gap-2 mb-6">
                 <Image 
-                  src="/assets/brand/sevalink-icon-only.png" 
-                  alt="SevaLink Icon" 
-                  width={64} 
-                  height={64} 
-                  className="h-16 w-16 object-contain"
+                  src="/assets/brand/SevaLink-logo-r.png" 
+                  alt="SevaLink" 
+                  width={360} 
+                  height={96} 
+                  className="h-16 sm:h-20 md:h-24 w-auto object-contain"
                 />
               </Link>
               <p className="text-sm text-black mb-8 leading-relaxed line-clamp-4 transition-colors duration-300 hover:text-red-600">

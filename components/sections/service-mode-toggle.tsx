@@ -12,7 +12,7 @@ type ServiceModeToggleProps = {
 export function ServiceModeToggle({ activeTab, onChange }: ServiceModeToggleProps) {
 
   return (
-    <section className="pt-24 mb-8">
+    <section className="pt-20 sm:pt-28 mb-1 sm:mb-4">
       <div className="container mx-auto px-4 sm:px-6 flex justify-center">
         <div className="relative inline-grid grid-cols-2 items-center rounded-full border border-gray-200/70 bg-white/90 p-1.5 shadow-md backdrop-blur-sm">
           <span
@@ -26,7 +26,7 @@ export function ServiceModeToggle({ activeTab, onChange }: ServiceModeToggleProp
           <button
             type="button"
             onClick={() => onChange("emergency")}
-            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+            className={`inline-flex items-center gap-2 rounded-full px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 ${
               activeTab === "emergency"
                 ? "relative z-10 text-white"
                 : "relative z-10 text-gray-800"
@@ -39,7 +39,7 @@ export function ServiceModeToggle({ activeTab, onChange }: ServiceModeToggleProp
           <button
             type="button"
             onClick={() => onChange("homecare")}
-            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+            className={`inline-flex items-center gap-2 rounded-full px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 ${
               activeTab === "homecare"
                 ? "relative z-10 text-white"
                 : "relative z-10 text-gray-800"

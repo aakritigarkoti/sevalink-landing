@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { Ambulance, Phone } from "lucide-react";
 import styles from "./final-cta-section.module.css";
 
-const trustPoints = ["No Hidden Charges", "10 Minute Response", "Pan India Coverage"];
+const trustPoints = ["No Hidden Charges", "Pan India Coverage"];
 
 export function FinalCTASection() {
   const ref = useRef<HTMLElement>(null);
@@ -125,6 +125,9 @@ export function FinalCTASection() {
           <button className={styles.primaryCtaButton}>
             <Ambulance className="w-5 h-5" /> Book Ambulance Now
           </button>
+          <button className={styles.primaryCtaButton} style={{ background: "rgba(34, 197, 94, 0.9)", borderBottom: "3px solid rgba(22, 163, 74, 1)" }}>
+            Book Home Care
+          </button>
           <button
             style={{
               padding: "clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px)",
@@ -142,7 +145,7 @@ export function FinalCTASection() {
             onMouseEnter={e => (e.currentTarget.style.border = "2px solid rgba(255,255,255,0.7)")}
             onMouseLeave={e => (e.currentTarget.style.border = "2px solid rgba(255,255,255,0.3)")}
           >
-            <Phone className="w-5 h-5" /> Call 108
+            <Phone className="w-5 h-5" /> Call Now
           </button>
         </div>
 

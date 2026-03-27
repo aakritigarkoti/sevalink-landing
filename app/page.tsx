@@ -15,7 +15,6 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { FinalCTASection } from "@/components/sections/final-cta-section";
 import { ServiceModeToggle } from "@/components/sections/service-mode-toggle";
 import { HomeCareServicesSection } from "@/components/sections/home-care-services-section";
-import { DualCTASection } from "@/components/sections/dual-cta-section";
 
 export default function Home() {
   const [activeMode, setActiveMode] = useState<"emergency" | "homecare">("emergency");
@@ -60,9 +59,6 @@ export default function Home() {
 
         {/* 11. Final CTA */}
         <FinalCTASection />
-
-        {/* 12. Emergency & Home Care CTA */}
-        <DualCTASection />
       </main>
 
       {/* Global Footer */}

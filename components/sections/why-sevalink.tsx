@@ -74,7 +74,7 @@ export function WhySevaLink() {
         <div className="flex-1 z-10">
           <h2 className={`ws-heading text-3xl sm:text-5xl lg:text-7xl font-black text-gray-900 mb-6 sm:mb-10 leading-[0.9] ${visible ? "show" : ""}`}>
             Why Choose <br />
-            <span className="text-red-600">SevaLink</span>
+            <span className="text-red-600">SevaLink?</span>
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
