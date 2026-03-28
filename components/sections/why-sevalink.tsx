@@ -5,14 +5,14 @@ import { FloatingMedicalIcons } from "@/components/ui/medical-background";
 import { useRef, useEffect, useState } from "react";
 
 const points = [
-  "10 Min Response Time",
-  "Real-Time GPS Tracking",
-  "Family Tracking Link",
-  "BLS ALS ICU Neonatal Types",
-  "Transparent Pricing",
-  "Call Masking Privacy",
-  "OTP Verified Drivers",
-  "Available 24/7",
+  "Instant Emergency Response",
+  "All Healthcare in One Platform",
+  "Real-Time Tracking & Transparency",
+  "Verified & Trusted Providers",
+  "Smart & Intelligent Care",
+  "Care at Your Doorstep",
+  "Easy, Fast & Convenient",
+  "24×7 Availability",
 ];
 
 export function WhySevaLink() {

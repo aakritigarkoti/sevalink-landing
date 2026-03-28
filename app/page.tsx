@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/sections/hero";
@@ -14,19 +13,18 @@ import { PartnersSection } from "@/components/sections/partners-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { FinalCTASection } from "@/components/sections/final-cta-section";
 import { HomeCareServicesSection } from "@/components/sections/home-care-services-section";
+import { ServiceAvailabilitySection } from "@/components/sections/service-availability-section";
 
 export default function Home() {
-  const [activeMode, setActiveMode] = useState<"emergency" | "homecare">("emergency");
-
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF3E0" }}>
       {/* Top Navigation */}
-      <Header activeMode={activeMode} onModeChange={setActiveMode} />
+      <Header />
 
       <main className="pt-[8.25rem] sm:pt-[8.75rem] md:pt-28">
 
         {/* 1. Main Banner */}
-        <HeroSection mode={activeMode} />
+        <HeroSection />
 
         {/* 3. Detailed Services (Neon/Animated Cards) */}
         <ServicesSection />
@@ -42,6 +40,9 @@ export default function Home() {
 
         {/* 6.5 Home Care Services */}
         <HomeCareServicesSection />
+
+        {/* 6.6 Service Availability - City Expansion */}
+        <ServiceAvailabilitySection />
 
         {/* 7. Social Proof (City-wise Filters) */}
         <TestimonialsSection />

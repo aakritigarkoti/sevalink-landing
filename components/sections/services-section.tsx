@@ -4,10 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import {
   Ambulance,
   Stethoscope,
-  MapPin,
-  Building2,
   HousePlus,
-  IndianRupee,
+  TestTube,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./services-section.css";
@@ -22,59 +20,60 @@ type ServiceItem = {
   role?: "patient" | "driver" | "fleet" | "hospital";
 };
 
-const services: ServiceItem[] = [
+const ambulanceServices: ServiceItem[] = [
   {
     icon: Ambulance,
     title: "Emergency Ambulance",
-    description: "Fastest ambulance dispatch with GPS tracking and certified paramedics.",
+    description: "Immediate response ambulance service for urgent medical situations",
     iconBg: "bg-red-50",
     iconText: "text-red-500",
     role: "patient",
   },
   {
-    icon: MapPin,
-    title: "Real-Time Tracking",
-    description: "Track your ambulance or caregiver live on map from booking to arrival.",
+    icon: Ambulance,
+    title: "ICU Ambulance",
+    description: "Fully equipped ICU ambulances with advanced life support systems",
     iconBg: "bg-red-50",
     iconText: "text-red-500",
     role: "driver",
   },
   {
-    icon: Building2,
-    title: "Hospital Selection",
-    description: "Choose the nearest or preferred hospital - we handle the rest.",
+    icon: Ambulance,
+    title: "Oxygen Ambulance",
+    description: "Ambulances with oxygen support for critical patient transport",
     iconBg: "bg-red-50",
     iconText: "text-red-500",
     role: "hospital",
   },
+];
+
+// Homecare services to be rendered in separate subsection
+const homecareServices: ServiceItem[] = [
+  {
+    icon: Stethoscope,
+    title: "Doctor at Home",
+    description: "Verified doctors visit your home for checkups and consultations",
+    iconBg: "bg-green-50",
+    iconText: "text-green-500",
+  },
   {
     icon: HousePlus,
     title: "Nurse at Home",
-    description: "Trained nurses for wound care, injections, post-surgery & elderly care.",
+    description: "Professional nursing care and medical support at your home",
     iconBg: "bg-green-50",
     iconText: "text-green-500",
-    badge: "New",
-    role: "fleet",
   },
   {
-    icon: Stethoscope,
-    title: "Doctor Home Visit",
-    description: "Verified doctors visit your home for check-ups and consultations.",
+    icon: TestTube,
+    title: "Lab Tests at Home",
+    description: "Book diagnostic tests from home with sample collection services",
     iconBg: "bg-green-50",
     iconText: "text-green-500",
-    badge: "New",
-  },
-  {
-    icon: IndianRupee,
-    title: "Transparent Pricing",
-    description: "No hidden charges. Know the cost before you book, every time.",
-    iconBg: "bg-red-50",
-    iconText: "text-red-500",
   },
 ];
 
 export default function ServicesSection() {
-  const [activeCardId, setActiveCardId] = useState<string | null>(services[0]?.title ?? null);
+  const [activeCardId, setActiveCardId] = useState<string | null>(ambulanceServices[0]?.title ?? null);
   const [highlightedRole, setHighlightedRole] = useState<string | null>(null);
   const clearHighlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -129,17 +128,42 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <ServiceCard 
-              key={service.title} 
-              service={service} 
-              index={index}
-              isActive={activeCardId === service.title}
-              isRoleHighlighted={highlightedRole === service.role}
-              onIntersect={setActiveCardId}
-            />
-          ))}
+        {/* Ambulance Services Subsection */}
+        <div className="mt-12 sm:mt-16">
+          <h3 className="mb-6 text-xl font-bold text-red-600 sm:text-2xl lg:text-3xl">
+            Ambulance Services
+          </h3>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {ambulanceServices.map((service, index) => (
+              <ServiceCard 
+                key={service.title} 
+                service={service} 
+                index={index}
+                isActive={activeCardId === service.title}
+                isRoleHighlighted={highlightedRole === service.role}
+                onIntersect={setActiveCardId}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Homecare Services Subsection */}
+        <div className="mt-12 sm:mt-16">
+          <h3 className="mb-6 text-xl font-bold text-green-600 sm:text-2xl lg:text-3xl">
+            Homecare Services
+          </h3>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {homecareServices.map((service, index) => (
+              <ServiceCard 
+                key={service.title} 
+                service={service} 
+                index={index}
+                isActive={activeCardId === service.title}
+                isRoleHighlighted={highlightedRole === service.role}
+                onIntersect={setActiveCardId}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

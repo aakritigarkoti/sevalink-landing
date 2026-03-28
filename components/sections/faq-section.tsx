@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
 const faqs = [
-  { q: "What is SevaLink?", a: "SevaLink is an emergency ambulance booking platform that connects patients with the nearest verified ambulance in under 10 minutes. We support BLS, ALS, ICU, and Neonatal ambulance types across India." },
-  { q: "How do I book an ambulance?", a: "Simply open SevaLink, tap 'Book Ambulance', share your location, and we'll dispatch the nearest ambulance within 60 seconds. You can also call 108 directly for immediate assistance." },
-  { q: "Is SevaLink available 24/7?", a: "Yes! SevaLink operates 24 hours a day, 7 days a week, 365 days a year — including all holidays and emergencies." },
-  { q: "Which areas are covered?", a: "We currently operate across major cities including Delhi, Mumbai, Bengaluru, Ahmedabad, Hyderabad, and are rapidly expanding Pan India." },
-  { q: "How much does it cost?", a: "SevaLink follows transparent pricing with no hidden charges. You'll see the full estimated fare before confirming the booking." },
-  { q: "How does family tracking work?", a: "Once an ambulance is dispatched, you receive a live tracking link that you can share with family members. They can track in real-time without needing the app." },
+  { q: "What is SevaLink?", a: "SevaLink is a smart healthcare platform that connects you to essential medical services—fast, reliable, and right when you need them. From emergencies to everyday care, SevaLink ensures help is always within reach." },
+  { q: "How quickly can I book an ambulance?", a: "You can book an ambulance in just a few clicks. Once confirmed, the nearest available ambulance is assigned instantly to reach you as quickly as possible." },
+  { q: "What services does SevaLink provide?", a: "SevaLink offers ambulance booking, doctor-at-home services, home medical care, checkups at home, and telemedicine consultations." },
+  { q: "Are the service providers verified?", a: "Yes, all ambulance and homecare providers on SevaLink are verified to ensure safety, professionalism, and quality service." },
+  { q: "Can I book services for someone else?", a: "Absolutely. You can easily book an ambulance or homecare service for your family members, friends, or anyone in need." },
+  { q: "Which cities is SevaLink available in?", a: "SevaLink is currently launching in Rajkot and will soon expand to Ahmedabad, Vadodara, and other major cities across Gujarat." },
 ];
 
 export function FAQSection() {

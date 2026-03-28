@@ -2,14 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Smartphone, Ambulance, MapPin, CheckCircle } from "lucide-react";
+import { MapPin, Activity, Users, CheckCircle, Ambulance } from "lucide-react";
 import { Map } from "@/components/ui/map";
 
 const steps = [
-  { id: "01", icon: Smartphone, title: "Book Ambulance", description: "Open SevaLink app and tap 'Book Now'. Share your location in one click." },
-  { id: "02", icon: Ambulance, title: "Instant Dispatch", description: "Nearest BLS/ALS ambulance is dispatched within 60 seconds automatically." },
-  { id: "03", icon: MapPin, title: "Live Tracking", description: "Track ambulance in real-time on map. Share live status with family." },
-  { id: "04", icon: CheckCircle, title: "Safe Arrival", description: "Reach verified hospital. Full trip summary and invoice sent instantly." },
+  { id: "01", icon: MapPin, title: "Enter your location", description: "Open SevaLink app and share your location with one click." },
+  { id: "02", icon: Activity, title: "Choose service", description: "Select between ambulance or homecare based on your need." },
+  { id: "03", icon: Users, title: "Select provider", description: "Choose from verified paramedics, nurses, or doctors nearby." },
+  { id: "04", icon: CheckCircle, title: "Confirm & get help", description: "Confirm booking and help arrives at your door immediately." },
 ];
 
 const EASE = "easeOut";
@@ -161,24 +161,6 @@ export default function HowItWorksSection() {
             <StepCard step={steps[3]} align="left" />
           </div>
 
-        </div>
-
-        {/* Bottom Dots */}
-        <div className="flex justify-center items-center gap-2 sm:gap-3 mt-12 sm:mt-16 lg:mt-20">
-          {steps.map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-2 sm:gap-3"
-            >
-              <div className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-[8px] sm:text-[10px] font-black shadow-lg">
-                0{i + 1}
-              </div>
-              {i < 3 && <div className="w-6 sm:w-8 h-[2px] bg-red-100" />}
-            </motion.div>
-          ))}
         </div>
 
       </div>
