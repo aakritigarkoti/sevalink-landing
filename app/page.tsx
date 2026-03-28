@@ -13,7 +13,6 @@ import { GetStartedSection } from "@/components/sections/get-started-section";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { FinalCTASection } from "@/components/sections/final-cta-section";
-import { ServiceModeToggle } from "@/components/sections/service-mode-toggle";
 import { HomeCareServicesSection } from "@/components/sections/home-care-services-section";
 
 export default function Home() {
@@ -22,10 +21,9 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF3E0" }}>
       {/* Top Navigation */}
-      <Header />
+      <Header activeMode={activeMode} onModeChange={setActiveMode} />
 
-      <main>
-        <ServiceModeToggle activeTab={activeMode} onChange={setActiveMode} />
+      <main className="pt-[8.25rem] sm:pt-[8.75rem] md:pt-28">
 
         {/* 1. Main Banner */}
         <HeroSection mode={activeMode} />
