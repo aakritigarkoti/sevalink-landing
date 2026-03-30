@@ -12,90 +12,61 @@ type TestimonialItem = CardStackItem & {
 const reviews: TestimonialItem[] = [
   {
     id: 1,
-    title: "Rahul Sharma",
-    city: "Ahmedabad",
+    title: "Priya Patel",
+    city: "Rajkot",
     description:
-      "Saved my father's life. The tracking link kept our family calm.",
-    rating: 5,
-    initials: "R",
-  },
-  {
-    id: 2,
-    title: "Priya Verma",
-    city: "Delhi",
-    description:
-      "Fastest response I've seen in Delhi. Driver was very professional.",
+      "Found an ambulance in Rajkot within minutes. The process was quick and stress-free.",
     rating: 5,
     initials: "P",
   },
   {
-    id: 3,
-    title: "Suresh Gupta",
-    city: "Mumbai",
-    description: "Transparent pricing is a game changer. Highly recommend.",
-    rating: 5,
-    initials: "S",
-  },
-  {
-    id: 4,
-    title: "Ananya Iyer",
-    city: "Bengaluru",
+    id: 2,
+    title: "Rohit Sharma",
+    city: "Ahmedabad",
     description:
-      "Booking process was super smooth. Ambulance arrived in under 9 minutes.",
-    rating: 5,
-    initials: "A",
-  },
-  {
-    id: 5,
-    title: "Mohit Bansal",
-    city: "Jaipur",
-    description:
-      "Live tracking and quick updates really helped us stay calm during emergency.",
-    rating: 5,
-    initials: "M",
-  },
-  {
-    id: 6,
-    title: "Sneha Kulkarni",
-    city: "Pune",
-    description:
-      "Paramedic team was skilled and supportive. Truly reliable emergency service.",
-    rating: 5,
-    initials: "S",
-  },
-  {
-    id: 7,
-    title: "Arvind Mehta",
-    city: "Delhi",
-    description:
-      "No hidden charges and clear fare estimate. Exactly what healthcare transport needs.",
-    rating: 5,
-    initials: "A",
-  },
-  {
-    id: 8,
-    title: "Ritika Nair",
-    city: "Chennai",
-    description:
-      "From booking to hospital drop, everything felt coordinated and professional.",
+      "Quick and reliable ambulance service in Ahmedabad. Help arrived right on time.",
     rating: 5,
     initials: "R",
   },
   {
-    id: 9,
-    title: "Karan Sood",
-    city: "Mumbai",
+    id: 3,
+    title: "Mehul Joshi",
+    city: "Rajkot",
+    description: "Late-night booking in Rajkot was smooth. Driver reached quickly and stayed professional.",
+    rating: 5,
+    initials: "M",
+  },
+  {
+    id: 4,
+    title: "Kavya Shah",
+    city: "Ahmedabad",
     description:
-      "Needed an ICU ambulance at midnight and got help quickly. Excellent response.",
+      "In Ahmedabad, the ambulance was assigned fast and tracking updates were very clear.",
     rating: 5,
     initials: "K",
+  },
+  {
+    id: 5,
+    title: "Nisarg Vora",
+    city: "Rajkot",
+    description:
+      "Support team kept us informed in Rajkot. The ambulance arrived when every minute mattered.",
+    rating: 5,
+    initials: "N",
+  },
+  {
+    id: 6,
+    title: "Ayesha Khan",
+    city: "Ahmedabad",
+    description:
+      "Booked during an emergency in Ahmedabad and got help quickly. Very dependable service.",
+    rating: 5,
+    initials: "A",
   },
 ];
 
 export function TestimonialsSection() {
-  const [filter, setFilter] = useState("All");
   const [viewportWidth, setViewportWidth] = useState(1280);
-  const cities = ["All", ...Array.from(new Set(reviews.map((r) => r.city)))];
 
   useEffect(() => {
     const updateWidth = () => setViewportWidth(window.innerWidth);
@@ -103,9 +74,6 @@ export function TestimonialsSection() {
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
-
-  const filteredReviews =
-    filter === "All" ? reviews : reviews.filter((r) => r.city === filter);
 
   const isMobile = viewportWidth < 640;
   const isTablet = viewportWidth >= 640 && viewportWidth < 1024;
@@ -123,25 +91,12 @@ export function TestimonialsSection() {
   return (
     <section className="min-h-fit flex items-center landing-section-spacing bg-white">
       <div className="max-w-7xl mx-auto w-full text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-8 sm:mb-12">Trust From <span className="text-red-600">Every Corner</span></h2>
-        
-        {/* City Filter */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
-          {cities.map(city => (
-            <button 
-              key={city}
-              onClick={() => setFilter(city)}
-              className={`px-4 sm:px-6 py-2 rounded-full font-bold transition-all text-xs sm:text-sm ${filter === city ? "bg-red-600 text-white shadow-lg shadow-red-200" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
-            >
-              {city}
-            </button>
-          ))}
-        </div>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-5">Trusted by Families in <span className="text-red-600">Rajkot</span></h2>
 
         {/* Left-to-right stack cards */}
         <div className="mx-auto w-full max-w-6xl">
           <CardStack<TestimonialItem>
-            items={filteredReviews}
+            items={reviews}
             initialIndex={0}
             maxVisible={maxVisible}
             cardWidth={cardWidth}

@@ -47,7 +47,7 @@ export default async function ProviderDetailPage({
     <div className="min-h-screen" style={{ backgroundColor: "#FFF3E0" }}>
       <Header />
 
-      <main className="landing-section-spacing">
+      <main className="pt-28 sm:pt-32 lg:pt-36 landing-section-spacing">
         <section className="mx-auto max-w-4xl rounded-3xl border border-orange-200/80 bg-gradient-to-br from-white via-[#fff7ee] to-[#ffe8d0] p-8 shadow-[0_12px_32px_rgba(192,110,60,0.12)] sm:p-12">
           <p className="mb-4 inline-block rounded-full bg-red-100 px-4 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-red-600">
             Provider Details

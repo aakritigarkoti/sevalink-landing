@@ -21,7 +21,7 @@ export default function Home() {
       {/* Top Navigation */}
       <Header />
 
-      <main className="pt-[8.25rem] sm:pt-[8.75rem] md:pt-28">
+      <main className="pt-[6.5rem] sm:pt-[7.5rem] md:pt-24">
 
         {/* 1. Main Banner */}
         <HeroSection />

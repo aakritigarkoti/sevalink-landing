@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   Building2,
   Ambulance,
@@ -150,13 +149,7 @@ function ProviderSectionBlock({
 
   return (
     <section id={provider.id} className="scroll-mt-28">
-      <motion.div
-        initial={{ opacity: 0, y: 26 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.55 }}
-        className="grid grid-cols-1 items-center gap-8 rounded-[2rem] border border-blue-100/80 bg-white/80 p-5 shadow-[0_20px_45px_rgba(14,56,107,0.1)] backdrop-blur-sm md:p-8 lg:grid-cols-2 lg:gap-12 lg:p-10"
-      >
+      <div className="grid grid-cols-1 items-start gap-8 rounded-[2rem] border border-blue-100/80 bg-white/80 p-5 shadow-[0_20px_45px_rgba(14,56,107,0.1)] backdrop-blur-sm md:p-8 lg:grid-cols-2 lg:gap-12 lg:p-10">
         <div className={reverse ? "order-1 lg:order-2" : "order-1"}>
           <div className="relative overflow-hidden rounded-[1.5rem] border border-blue-100/80 bg-slate-100 shadow-[0_16px_36px_rgba(20,60,120,0.18)]">
             <div className="relative aspect-[4/3] w-full">
@@ -171,17 +164,12 @@ function ProviderSectionBlock({
               
               {/* Coming Soon Badge */}
               {provider.id === "homecare" && (
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                  className="absolute top-4 right-4 z-10"
-                >
+                <div className="absolute top-4 right-4 z-10">
                   <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-2 shadow-lg border border-amber-200">
-                    <div className="h-2 w-2 rounded-full bg-white animate-pulse" />
+                    <div className="h-2 w-2 rounded-full bg-white" />
                     <span className="text-xs font-bold text-white uppercase tracking-wider">Coming Soon</span>
                   </div>
-                </motion.div>
+                </div>
               )}
             </div>
           </div>
@@ -207,18 +195,14 @@ function ProviderSectionBlock({
             {provider.requirementsTitle}
           </h3>
           <div className="mt-3 space-y-2.5">
-            {provider.requirements.map((item, index) => (
-              <motion.div
+            {provider.requirements.map((item) => (
+              <div
                 key={item}
-                initial={{ opacity: 0, x: -12 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.6 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
                 className="flex items-start gap-3"
               >
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
                 <span className="text-sm text-slate-700">{item}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -228,18 +212,14 @@ function ProviderSectionBlock({
                 {provider.extraListTitle}
               </h3>
               <div className="mt-3 space-y-2.5">
-                {provider.extraList.map((item, index) => (
-                  <motion.div
+                {provider.extraList.map((item) => (
+                  <div
                     key={item}
-                    initial={{ opacity: 0, x: -12 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.6 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
                     className="flex items-start gap-3"
                   >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
                     <span className="text-sm text-slate-700">{item}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </>
@@ -269,7 +249,7 @@ function ProviderSectionBlock({
             </a>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
@@ -280,13 +260,7 @@ export function ProviderCatalogSection() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_10%,rgba(59,130,246,0.18),transparent_40%),radial-gradient(circle_at_84%_16%,rgba(239,68,68,0.14),transparent_40%),linear-gradient(180deg,#f7fbff_0%,#eef6ff_55%,#eaf2fd_100%)]" />
 
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55 }}
-          className="mx-auto mb-10 max-w-3xl text-center sm:mb-14"
-        >
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
           <p className="mb-3 inline-block rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-blue-700">
             SevaLink Provider Network
           </p>
@@ -296,7 +270,7 @@ export function ProviderCatalogSection() {
           <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
             Explore each provider role, verify your eligibility, and register in seconds with a phone-first join flow.
           </p>
-        </motion.div>
+        </div>
 
         <div className="space-y-10 sm:space-y-12">
           {providers.map((provider, index) => (
