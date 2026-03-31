@@ -1,8 +1,4 @@
-'use client';
-
-
-
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Ambulance, HousePlus } from "lucide-react";
@@ -16,76 +12,74 @@ const HEADER_HEIGHT = {
   md: "4rem",      // 64px
 };
 
+const heroData = {
+  emergency: {
+    tag: "Emergency Services",
+    headline: ["Every Second", "Matters"],
+    desc: "Book a verified ambulance in 30 seconds. GPS-tracked, 24/7 available.",
+    image: "/images/ambulance.png",
+    cta: "Book Ambulance",
+    ctaLink: "/services#ambulance",
+    stats: [
+      { icon: Ambulance, val: "10 min", label: "Response" },
+      { icon: HousePlus, val: "24/7", label: "Available" },
+    ],
+  },
+  homecare: {
+    tag: "Home Care",
+    headline: ["Professional Care", "At Your Door"],
+    desc: "Nursing, elderly support & doctor visits by verified professionals.",
+    image: "/images/homecare.avif",
+    cta: "Book Home Care",
+    ctaLink: "/services#homecare",
+    stats: [
+      { icon: HousePlus, val: "At Home", label: "Visits" },
+      { icon: Ambulance, val: "Verified", label: "Staff" },
+    ],
+  },
+};
+
 export function HeroSection() {
-  // State: 'emergency' or 'homecare'
   const [active, setActive] = useState<'emergency' | 'homecare'>("emergency");
   const inactive = active === "emergency" ? "homecare" : "emergency";
   const [isMobile, setIsMobile] = useState(false);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
-  React.useEffect(() => {
+  const swipeDetected = useRef(false);
+
+  useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Data for each hero state
-  const heroData = {
-    emergency: {
-      tag: "Emergency Services",
-      headline: ["Every Second", "Matters"],
-      desc: "Book a verified ambulance in 30 seconds. GPS-tracked, 24/7 available.",
-      image: "/images/ambulance.png",
-      cta: "Book Ambulance",
-      ctaLink: "/services#ambulance",
-      stats: [
-        { icon: Ambulance, val: "10 min", label: "Response" },
-        { icon: HousePlus, val: "24/7", label: "Available" },
-      ],
-    },
-    homecare: {
-      tag: "Home Care",
-      headline: ["Professional Care", "At Your Door"],
-      desc: "Nursing, elderly support & doctor visits by verified professionals.",
-      image: "/images/homecare.avif",
-      cta: "Book Home Care",
-      ctaLink: "/services#homecare",
-      stats: [
-        { icon: HousePlus, val: "At Home", label: "Visits" },
-        { icon: Ambulance, val: "Verified", label: "Staff" },
-      ],
-    },
-  };
-
-
-
   return (
-    <section className="relative min-h-screen bg-background font-display overflow-hidden flex items-center justify-center">
+    <section className="relative min-h-screen bg-background font-display overflow-hidden flex items-center justify-center px-0 py-0 -mt-3 sm:mt-0">
       <FloatingMedicalIcons />
-      {/* Subtle background gradient */}
       <div className={`absolute top-1/2 right-0 w-[600px] h-[600px] rounded-full blur-[150px] opacity-10 -translate-y-1/2 ${active === "emergency" ? "bg-red-500" : "bg-emerald-400"}`} />
-      {/* Removed colored spacing background */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
-
-      <div className="w-full max-w-7xl mx-auto px-6 lg:px-16 pt-0 lg:pt-0 mt-0 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 items-start">
+      <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-10 pt-0 sm:pt-0 lg:pt-0 mt-0 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 items-start">
           {/* Left Content */}
-          <div className="lg:col-span-5 pt-0 sm:pt-0 mt-0 md:pt-2 md:mt-0">
-            {/* Toggle with framer-motion sliding bg */}
-            <div className="relative inline-flex items-center bg-muted rounded-full p-1 mb-2">
+          <div className="lg:col-span-5 flex flex-col justify-center h-full min-h-[320px] sm:min-h-[400px] md:min-h-[480px] lg:min-h-[540px] pt-0 sm:pt-0 md:pt-0 lg:pt-0 mt-0">
+            {/* Toggle with framer-motion sliding bg - now in normal flow */}
+            <div className="inline-flex items-center bg-muted rounded-full p-1 mb-6 relative w-full max-w-xs" style={{minWidth:'220px'}}>
               <motion.div
-                className={`absolute top-1 bottom-1 rounded-full shadow-lg ${active === "emergency" ? "bg-red-500 shadow-red-400/30" : "bg-emerald-400 shadow-emerald-300/30"}`}
+                className={`absolute top-1 bottom-1 left-1 w-1/2 rounded-full shadow-lg ${active === "emergency" ? "bg-red-500 shadow-red-400/30" : "bg-emerald-400 shadow-emerald-300/30"}`}
                 layout
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                style={{ left: active === "emergency" ? "4px" : "50%", right: active === "emergency" ? "50%" : "4px" }}
+                style={{
+                  transform: active === "emergency" ? "translateX(0%)" : "translateX(100%)"
+                }}
               />
               {["emergency", "homecare"].map((s) => (
                 <button
                   key={s}
                   onClick={() => setActive(s as 'emergency' | 'homecare')}
-                  className={`relative z-10 flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors duration-200 ${active === s ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
+                  className={`relative z-10 flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors duration-200 w-1/2 justify-center ${active === s ? "text-white" : "text-muted-foreground hover:text-foreground"}`}
                   aria-pressed={active === s}
+                  style={{position:'relative'}}
                 >
                   {s === "emergency" ? <Ambulance className="w-4 h-4" /> : <HousePlus className="w-4 h-4" />}
                   {s === "emergency" ? "Emergency" : "Home Care"}
@@ -100,39 +94,25 @@ export function HeroSection() {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.4 }}
               >
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+                <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">
                   {heroData[active].tag}
                 </span>
-                <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-foreground leading-[1.08] tracking-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-[3rem] font-bold text-foreground leading-[1.08] tracking-tight mb-2">
                   {heroData[active].headline[0]}
                   <br />
                   <span className={active === "emergency" ? "text-red-500" : "text-emerald-400"}>{heroData[active].headline[1]}</span>
                 </h1>
-                <p className="mt-5 text-muted-foreground text-base leading-relaxed max-w-sm">{heroData[active].desc}</p>
-                <div className="flex items-center gap-4 mt-8">
-                  {active === "emergency" ? (
-                    <Link
-                      href="/services#ambulance"
-                      scroll={true}
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm shadow-xl transition-all hover:scale-105 bg-red-500 !text-white shadow-red-400/25"
-                    >
-                      {heroData[active].cta}
-                    </Link>
-                  ) : (
-                    <Link
-                      href={heroData[active].ctaLink}
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm shadow-xl transition-all hover:scale-105 bg-emerald-400 !text-white shadow-emerald-300/25"
-                    >
-                      {heroData[active].cta}
-                    </Link>
-                  )}
-                  {active === "homecare" ? (
-                    <a href="#homecare-services" className="px-5 py-3.5 rounded-full text-sm font-semibold text-foreground border border-border hover:bg-accent transition-colors">Learn More</a>
-                  ) : (
-                    <a href="#services" className="px-5 py-3.5 rounded-full text-sm font-semibold text-foreground border border-border hover:bg-accent transition-colors">Learn More</a>
-                  )}
+                <p className="mt-3 text-muted-foreground text-sm leading-relaxed max-w-xs mb-6">{heroData[active].desc}</p>
+                <div className="flex items-center gap-3 mt-0 mb-4">
+                  <Link
+                    href={heroData[active].ctaLink}
+                    scroll={true}
+                    className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm shadow-xl transition-all hover:scale-105 ${active === "emergency" ? "bg-red-500 !text-white shadow-red-400/25" : "bg-emerald-400 !text-white shadow-emerald-300/25"}`}
+                  >
+                    {heroData[active].cta}
+                  </Link>
                 </div>
-                <div className="flex gap-6 mt-4 pt-4 border-t border-border">
+                <div className="flex gap-3 mt-0 mb-0">
                   {heroData[active].stats.map((stat) => (
                     <div key={stat.label} className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${active === "emergency" ? "bg-red-500/10" : "bg-emerald-400/10"}`}>
@@ -149,7 +129,7 @@ export function HeroSection() {
             </AnimatePresence>
           </div>
           {/* Right Images — Asymmetric, animated, swipeable on mobile */}
-          <div className="lg:col-span-7 relative min-h-[38vh] h-[220px] xs:h-[280px] sm:h-[340px] md:h-[440px] lg:h-[540px]">
+          <div className="lg:col-span-7 relative min-h-[28vh] h-[160px] xs:h-[200px] sm:h-[260px] md:h-[340px] lg:h-[440px]">
             {/* Main Image */}
             <AnimatePresence mode="wait">
               <motion.div
@@ -177,7 +157,13 @@ export function HeroSection() {
             {/* Peeking Image (clickable) */}
             <motion.div
               className="absolute bottom-0 left-0 w-[55%] h-[55%] rounded-2xl overflow-hidden shadow-xl border-4 border-background z-20 cursor-pointer"
-              onClick={() => setActive(inactive)}
+              onClick={() => {
+                if (swipeDetected.current) {
+                  swipeDetected.current = false;
+                  return;
+                }
+                setActive(inactive);
+              }}
               whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.3 }}
             >
@@ -201,11 +187,12 @@ export function HeroSection() {
             {isMobile && (
               <div
                 className="absolute inset-0 z-30 cursor-pointer"
-                onTouchStart={e => { touchStartX.current = e.touches[0].clientX; }}
+                onTouchStart={e => { touchStartX.current = e.touches[0].clientX; swipeDetected.current = false; }}
                 onTouchMove={e => { touchEndX.current = e.touches[0].clientX; }}
                 onTouchEnd={() => {
                   const dx = touchEndX.current - touchStartX.current;
                   if (Math.abs(dx) > 40) {
+                    swipeDetected.current = true;
                     if (dx < 0) setActive("homecare");
                     if (dx > 0) setActive("emergency");
                   }

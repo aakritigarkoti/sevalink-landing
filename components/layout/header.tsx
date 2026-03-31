@@ -45,7 +45,7 @@ export const Header = ({ activeMode, onModeChange }: HeaderProps = {}) => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl">
       <div className="w-full px-0 sm:px-0">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between md:h-16">
-          <div className="flex items-center justify-between h-14 sm:h-16 md:h-auto md:shrink-0 pl-4 pr-4">
+          <div className="flex items-center justify-between h-12 sm:h-16 md:h-auto md:shrink-0 pl-4 pr-4">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group cursor-pointer">
               <Image
