@@ -46,22 +46,22 @@ export const Footer = () => {
 
       <div className="relative z-10">
       {/* Main Footer Content */}
-      <div className="pt-16 md:pt-20 pb-10 border-b border-black/10">
+      <div className="pt-4 md:pt-6 pb-8 border-b border-black/10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-20 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-14 mb-4">
             
             {/* Column 1: Brand + About */}
             <div>
-              <Link href="/" className="inline-flex items-center gap-2 mb-6">
+              <Link href="/" className="inline-flex items-center gap-2 mb-4">
                 <Image 
                   src="/assets/brand/SevaLink-logo-r.png" 
                   alt="SevaLink" 
                   width={520} 
                   height={140} 
-                  className="h-28 sm:h-32 md:h-44 w-auto object-contain"
+                  className="h-20 sm:h-24 md:h-32 w-auto object-contain"
                 />
               </Link>
-              <p className="text-sm text-black mb-8 leading-relaxed line-clamp-4 transition-colors duration-300 hover:text-red-600">
+              <p className="text-sm text-black mb-5 leading-relaxed line-clamp-4 transition-colors duration-300 hover:text-red-600">
                 Real-time emergency response platform connecting patients, ambulances, hospitals & homecare services.
               </p>
               <div className="flex items-center gap-2 text-sm text-black transition-colors duration-300 hover:text-red-600">
@@ -72,8 +72,8 @@ export const Footer = () => {
 
             {/* Column 2: Services */}
             <div>
-              <h4 className="text-sm font-bold text-red-600 mb-6 uppercase tracking-wider transition-colors duration-300">Services</h4>
-              <ul className="space-y-4">
+              <h4 className="text-sm font-bold text-red-600 mb-4 uppercase tracking-wider transition-colors duration-300">Services</h4>
+              <ul className="space-y-3">
                 {footerLinks.Services.map((link) => (
                   <li key={link.name}>
                     <Link href="/services" className="hover-link text-sm text-black inline-block cursor-pointer transition-colors duration-300 hover:text-red-600">
@@ -86,8 +86,8 @@ export const Footer = () => {
 
             {/* Column 3: Platforms */}
             <div>
-              <h4 className="text-sm font-bold text-red-600 mb-6 uppercase tracking-wider transition-colors duration-300">Platforms</h4>
-              <ul className="space-y-4">
+              <h4 className="text-sm font-bold text-red-600 mb-4 uppercase tracking-wider transition-colors duration-300">Platforms</h4>
+              <ul className="space-y-3">
                 {footerLinks.Platforms.map((link) => (
                   <li key={link.name}>
                     <Link 
@@ -103,8 +103,8 @@ export const Footer = () => {
 
             {/* Column 4: Company + Support */}
             <div>
-              <h4 className="text-sm font-bold text-red-600 mb-6 uppercase tracking-wider transition-colors duration-300">Company</h4>
-              <ul className="space-y-4">
+              <h4 className="text-sm font-bold text-red-600 mb-4 uppercase tracking-wider transition-colors duration-300">Company</h4>
+              <ul className="space-y-3">
                 {footerLinks.Company.map((link) => (
                   <li key={link.name}>
                     <Link 
@@ -122,9 +122,9 @@ export const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="py-14 border-t border-black/10 transition-all duration-300">
+      <div className="py-10 border-t border-black/10 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
             <motion.div 
               className="text-center md:text-left transition-all duration-300"
               initial={{ opacity: 0 }}
@@ -134,11 +134,11 @@ export const Footer = () => {
               <p className="text-xs text-black font-medium transition-colors duration-300 hover:text-red-600">
                 © 2026 SevaLink. All rights reserved.
               </p>
-              <p className="text-xs text-black/80 mt-2 transition-colors duration-300 hover:text-red-600">
+              <p className="text-xs text-black/80 mt-1 transition-colors duration-300 hover:text-red-600">
                 Made for faster emergency response in India
               </p>
             </motion.div>
-            <div className="mt-2 md:mt-0 w-full md:w-auto flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-4 sm:gap-6 text-xs text-black text-center transition-all duration-300">
+            <div className="mt-2 md:mt-0 w-full md:w-auto flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-3 sm:gap-4 text-xs text-black text-center transition-all duration-300">
               <Link href="/privacy-policy" className="hover-link whitespace-nowrap transition-all duration-300 hover:translate-x-0.5 hover:text-red-600">Privacy Policy</Link>
               <span className="hidden sm:block w-1 h-1 bg-black/30 rounded-full transition-all duration-300"></span>
               <Link href="/terms-and-conditions" className="hover-link whitespace-nowrap transition-all duration-300 hover:translate-x-0.5 hover:text-red-600">Terms & Conditions</Link>
@@ -147,7 +147,7 @@ export const Footer = () => {
               <span className="hidden sm:block w-1 h-1 bg-black/30 rounded-full transition-all duration-300"></span>
               <motion.button 
                 onClick={scrollToTop}
-                className="mt-1 sm:mt-0 text-black transition-all duration-300 flex items-center gap-2 group font-semibold hover:gap-3 hover:text-red-600"
+                className="mt-0 sm:mt-0 text-black transition-all duration-300 flex items-center gap-2 group font-semibold hover:gap-3 hover:text-red-600"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >

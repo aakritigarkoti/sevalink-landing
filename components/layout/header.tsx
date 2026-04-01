@@ -43,9 +43,9 @@ export const Header = ({ activeMode, onModeChange }: HeaderProps = {}) => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl">
-      <div className="w-full px-0 sm:px-0">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between md:h-16">
-          <div className="flex items-center justify-between h-12 sm:h-16 md:h-auto md:shrink-0 pl-4 pr-4">
+          <div className="flex items-center justify-between h-12 sm:h-16 md:h-auto md:shrink-0">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group cursor-pointer">
               <Image
@@ -143,7 +143,7 @@ export const Header = ({ activeMode, onModeChange }: HeaderProps = {}) => {
           </nav>
 
           {/* CTA + Toggle - Desktop */}
-          <div className="hidden md:flex items-center gap-2 md:shrink-0">
+          <div className="hidden md:flex items-center gap-2 md:shrink-0 pr-2">
             {showModeToggle ? (
               <div className="relative inline-grid grid-cols-2 items-center rounded-full border border-gray-200/70 bg-white/90 p-0.5 shadow-sm backdrop-blur-sm md:ml-2 md:inline-flex">
                 <span
