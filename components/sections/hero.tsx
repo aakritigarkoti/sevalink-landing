@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Ambulance, HousePlus } from "lucide-react";
+import { Ambulance, HousePlus, Phone, Home } from "lucide-react";
 import { FloatingMedicalIcons } from "../ui/medical-background";
 import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
@@ -67,8 +67,8 @@ export function HeroSection() {
             <div className="flex mb-4">
               <div className="relative flex bg-card rounded-full p-1 shadow-sm border border-border w-full max-w-xs" style={{ minWidth: "220px" }}>
                 {[
-                  { id: "emergency", label: "Emergency", icon: Ambulance },
-                  { id: "homecare", label: "Home Care", icon: HousePlus },
+                  { id: "emergency", label: "Emergency", icon: Phone },
+                  { id: "homecare", label: "Home Care", icon: Home },
                 ].map((tab) => (
                   <button
                     key={tab.id}
