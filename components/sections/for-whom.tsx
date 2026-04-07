@@ -1,4 +1,6 @@
 'use client';
+"use client";
+
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -39,11 +41,11 @@ const audiences: Audience[] = [
     color: "bg-red-600",
   },
   {
-    id: "hospital",
+    id: "homecare",
     title: "Homecare",
     icon: Home,
     image: "/images/homecare.avif",
-    features: ["Manage bookings", "Patient coordination", "Care team sync"],
+    features: ["Book care at home", "Doctor & nurse visits", "Lab tests at home"],
     color: "bg-green-600",
   },
 ];
@@ -52,7 +54,7 @@ const roleTargetMap: Record<string, { page?: string; sectionId: string; cardId: 
   patient: { page: "/services", sectionId: "services-section", cardId: "ambulance" },
   driver: { page: "/provider", sectionId: "provider-section", cardId: "driver" },
   fleet: { page: "/provider", sectionId: "provider-section", cardId: "fleet" },
-  hospital: { page: "/services", sectionId: "services-section", cardId: "homecare" },
+  homecare: { page: "/services", sectionId: "services-section", cardId: "homecare" },
 };
 
 export function ForWhomSection() {
@@ -98,8 +100,7 @@ export function ForWhomSection() {
     <section
       id="for-whom"
       ref={ref}
-      className="min-h-fit flex items-center landing-section-spacing scroll-mt-24"
-      style={{ backgroundColor: "#FFF3E0" }}
+      className="min-h-fit flex items-center landing-section-spacing scroll-mt-24 bg-white"
     >
       <div className="max-w-7xl mx-auto w-full">
 
@@ -115,7 +116,7 @@ export function ForWhomSection() {
           <span className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-red-100 text-red-600 text-[10px] sm:text-[11px] font-black tracking-widest uppercase mb-3 sm:mb-4">
             Who We Serve
           </span>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
             Built for{" "}
             <span className="text-red-600">Every Emergency</span>
           </h2>
@@ -127,7 +128,7 @@ export function ForWhomSection() {
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8 items-stretch">
           {audiences.map((item, i) => {
-            const isHomecareCard = item.id === "hospital";
+            const isHomecareCard = item.id === "homecare";
 
             return (
             <div

@@ -35,36 +35,6 @@ export function WhySevaLink() {
 
   return (
     <section ref={sectionRef} className="relative min-h-fit flex items-center landing-section-spacing bg-white overflow-hidden">
-      <style>{`
-        .ws-heading {
-          opacity: 0;
-          transform: translateX(-40px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .ws-heading.show {
-          opacity: 1;
-          transform: translateX(0);
-        }
-        .ws-image {
-          opacity: 0;
-          transform: scale(0.85) rotate(2deg);
-          transition: opacity 0.7s ease, transform 0.7s ease;
-          transition-delay: 0.2s;
-        }
-        .ws-image.show {
-          opacity: 1;
-          transform: scale(1) rotate(0deg);
-        }
-        .ws-card {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .ws-card.show {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `}</style>
 
       <FloatingMedicalIcons />
 
@@ -72,7 +42,7 @@ export function WhySevaLink() {
 
         {/* Left Content */}
         <div className="flex-1 z-10">
-          <h2 className={`ws-heading text-3xl sm:text-5xl lg:text-7xl font-black text-gray-900 mb-6 sm:mb-10 leading-[0.9] ${visible ? "show" : ""}`}>
+          <h2 className={`ws-heading text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-6 sm:mb-10 leading-tight ${visible ? "show" : ""}`}>
             Why Choose <br />
             <span className="text-red-600">SevaLink?</span>
           </h2>

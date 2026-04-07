@@ -1,6 +1,12 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
+export const metadata = {
+  title: "Emergency Guidelines — SevaLink",
+  description:
+    "Steps to follow when booking a SevaLink ambulance. Share your location, keep patient details ready, and follow responder instructions.",
+};
+
 export default function EmergencyGuidelinesPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF3E0" }}>

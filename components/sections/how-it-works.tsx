@@ -16,12 +16,12 @@ const EASE = "easeOut";
 const DURATION = 0.45;
 
 function MapScreen() {
-  // Noida/Delhi region coordinates - center of map [latitude, longitude]
-  const mapCenter: [number, number] = [28.5355, 77.3910];
-  
+  // Rajkot, Gujarat coordinates - center of map [latitude, longitude]
+  const mapCenter: [number, number] = [22.3039, 70.8022];
+
   // Sample ambulance location marker
   const ambulanceMarker = [
-    { lat: 28.5355, lng: 77.3910, label: "Hospital" }
+    { lat: 22.3039, lng: 70.8022, label: "Hospital" }
   ];
 
   return (
@@ -107,8 +107,8 @@ function StepCard({ step, align }: { step: typeof steps[0]; align: "left" | "rig
 
 export default function HowItWorksSection() {
   return (
-    <section className="w-full min-h-fit flex items-center landing-section-spacing bg-[#FEF3E2] overflow-hidden">
-      <div className="max-w-6xl mx-auto w-full">
+    <section className="w-full min-h-fit flex items-center landing-section-spacing bg-gray-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full">
 
         {/* Heading */}
         <motion.div
@@ -120,7 +120,7 @@ export default function HowItWorksSection() {
           <span className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-red-100 text-red-600 text-[10px] sm:text-[11px] font-black tracking-widest uppercase mb-3 sm:mb-4">
             How It Works
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
             Emergency Help in <span className="text-red-600">4 Simple Steps</span>
           </h2>
         </motion.div>

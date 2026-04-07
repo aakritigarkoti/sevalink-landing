@@ -1,6 +1,12 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
+export const metadata = {
+  title: "Help Center — SevaLink",
+  description:
+    "Find answers about ambulance booking, live tracking, homecare appointments, payments, and cancellations on SevaLink.",
+};
+
 export default function HelpPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF3E0" }}>

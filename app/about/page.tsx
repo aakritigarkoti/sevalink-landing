@@ -1,6 +1,12 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
+export const metadata = {
+  title: "About SevaLink",
+  description:
+    "SevaLink is a real-time emergency response platform connecting patients, ambulances, hospitals, and homecare providers in Rajkot, Gujarat, India.",
+};
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF3E0" }}>

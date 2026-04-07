@@ -91,7 +91,7 @@ export function TestimonialsSection() {
   return (
     <section className="min-h-fit flex items-center landing-section-spacing bg-white">
       <div className="max-w-7xl mx-auto w-full text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-5">Trusted by Families in <span className="text-red-600">Rajkot</span></h2>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-3 sm:mb-5">Trusted by Families in <span className="text-red-600">Rajkot</span></h2>
 
         {/* Left-to-right stack cards */}
         <div className="mx-auto w-full max-w-6xl">

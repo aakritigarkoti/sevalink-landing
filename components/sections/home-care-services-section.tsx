@@ -27,12 +27,12 @@ const homeCareServices = [
 export function HomeCareServicesSection() {
   return (
     <section className="landing-section-spacing bg-gradient-to-b from-emerald-50/80 via-green-50/70 to-emerald-100/40">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl">
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
           <p className="mb-3 inline-block rounded-full border border-emerald-300 bg-emerald-100 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-emerald-700">
             HOME CARE SERVICES
           </p>
-          <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900">
             Professional <span className="text-emerald-700">Care</span> at Home
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-slate-700 sm:text-base">

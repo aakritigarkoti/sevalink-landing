@@ -2,6 +2,11 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Smartphone, Download, Shield, Clock } from "lucide-react";
+import Link from "next/link";
+
+// Read from environment variables — set in .env.local (see .env.example)
+const APP_STORE_URL = process.env.NEXT_PUBLIC_APP_STORE_URL ?? "#";
+const PLAY_STORE_URL = process.env.NEXT_PUBLIC_PLAY_STORE_URL ?? "#";
 
 export function GetStartedSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -103,67 +108,11 @@ export function GetStartedSection() {
       className="flex items-center landing-section-spacing"
       style={{ backgroundColor: "rgb(246, 62, 62)" }}
     >
-      <style>{`
-        .gs-content {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .gs-content.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .gs-button {
-          transition: all 0.3s ease;
-        }
-        .gs-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .trust-item {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .trust-item.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .gs-phone-interactive {
-          position: relative;
-          transition: transform 0.35s ease, filter 0.35s ease;
-          will-change: transform;
-        }
-        .gs-phone-interactive:hover {
-          transform: translateY(-8px) scale(1.05);
-          filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.22));
-        }
-        .gs-phone-interactive.is-active {
-          transform: translateY(-6px) scale(1.04);
-        }
-        .gs-phone-glow {
-          position: absolute;
-          inset: -14px;
-          border-radius: 28px;
-          pointer-events: none;
-          background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 58%);
-          opacity: 0;
-          transition: opacity 0.25s ease;
-        }
-        .gs-phone-interactive:hover .gs-phone-glow,
-        .gs-phone-interactive.is-active .gs-phone-glow {
-          opacity: 1;
-        }
-        @keyframes gsFloat {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
-        }
-      `}</style>
 
       <div className="max-w-7xl mx-auto w-full">
         <div className="text-center mb-8 sm:mb-10">
           <h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-black !text-white tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-black !text-white tracking-tight"
             style={{ textShadow: "0 8px 24px rgba(0, 0, 0, 0.35)" }}
           >
             Join Us
@@ -189,14 +138,20 @@ export function GetStartedSection() {
 
             {/* App Store Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button className="gs-button flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-red-600 rounded-2xl font-black text-sm sm:text-base hover:bg-gray-100">
+              <Link
+                href={APP_STORE_URL}
+                className="gs-button flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-red-600 rounded-2xl font-black text-sm sm:text-base hover:bg-gray-100"
+              >
                 <Smartphone size={20} />
                 <span>App Store</span>
-              </button>
-              <button className="gs-button flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/20 backdrop-blur-sm text-white border-2 border-white rounded-2xl font-black text-sm sm:text-base hover:bg-white/30">
+              </Link>
+              <Link
+                href={PLAY_STORE_URL}
+                className="gs-button flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/20 backdrop-blur-sm text-white border-2 border-white rounded-2xl font-black text-sm sm:text-base hover:bg-white/30"
+              >
                 <Smartphone size={20} />
                 <span>Google Play</span>
-              </button>
+              </Link>
             </div>
 
             {/* Trust Points */}

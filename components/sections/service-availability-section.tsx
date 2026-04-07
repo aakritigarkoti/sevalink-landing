@@ -12,8 +12,8 @@ const cities = [
 
 export function ServiceAvailabilitySection() {
   return (
-    <section className="w-full min-h-fit flex items-center landing-section-spacing bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+    <section className="w-full min-h-fit flex items-center landing-section-spacing bg-gray-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -101,10 +101,33 @@ export function ServiceAvailabilitySection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-12 sm:mt-16"
         >
-          <p className="text-base sm:text-lg text-gray-700">
+          <p className="text-base sm:text-lg text-gray-700 mb-6">
             Service not available in your city yet?{" "}
             <span className="font-bold text-red-600">Get notified</span> when we launch near you.
           </p>
+          <form
+            name="notify-me"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+          >
+            <input type="hidden" name="form-name" value="notify-me" />
+            <p className="hidden"><label>Do not fill: <input name="bot-field" /></label></p>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+              className="flex-1 rounded-full border border-gray-300 bg-white px-5 py-3 text-sm text-gray-900 outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-red-600 px-6 py-3 text-sm font-bold text-white hover:bg-red-700 transition-colors whitespace-nowrap"
+            >
+              Notify Me
+            </button>
+          </form>
         </motion.div>
       </div>
     </section>

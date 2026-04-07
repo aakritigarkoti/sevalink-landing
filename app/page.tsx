@@ -1,5 +1,3 @@
-"use client";
-
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/sections/hero";
@@ -18,49 +16,33 @@ import { ServiceAvailabilitySection } from "@/components/sections/service-availa
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Top Navigation */}
       <Header />
-
       <main className="pt-[3.5rem] sm:pt-[4.5rem] md:pt-16">
-
         {/* 1. Main Banner */}
         <HeroSection />
-
-        {/* 3. Detailed Services (Neon/Animated Cards) */}
+        {/* 2. Detailed Services */}
         <ServicesSection />
-
-        {/* 4. Target Audience (Architecture based) */}
+        {/* 3. Target Audience */}
         <ForWhomSection />
-
-        {/* 5. Process Flow (Phone & Map Animation) */}
+        {/* 4. Process Flow */}
         <HowItWorksSection />
-
-        {/* 6. Key Differentiators (8 Points & Image) */}
+        {/* 5. Key Differentiators */}
         <WhySevaLink />
-
-        {/* 6.5 Home Care Services */}
+        {/* 6. Home Care Services */}
         <HomeCareServicesSection />
-
-        {/* 6.6 Service Availability - City Expansion */}
+        {/* 7. Service Availability */}
         <ServiceAvailabilitySection />
-
-        {/* 7. Social Proof (City-wise Filters) */}
+        {/* 8. Social Proof */}
         <TestimonialsSection />
-
-        {/* 8. Download App CTA */}
+        {/* 9. Download App CTA */}
         <GetStartedSection />
-
-        {/* 9. Trusted Hospital Partners */}
+        {/* 10. Partner Network */}
         <PartnersSection />
-
-        {/* 10. Frequently Asked Questions */}
+        {/* 11. FAQ */}
         <FAQSection />
-
-        {/* 11. Final CTA */}
+        {/* 12. Final CTA */}
         <FinalCTASection />
       </main>
-
-      {/* Global Footer */}
       <Footer />
     </div>
   );

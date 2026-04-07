@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,11 +57,11 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative bg-white font-display overflow-hidden flex items-center justify-center md:mt-0 px-[20px] sm:px-6 lg:px-8 py-0 pt-6 -mt-[9px]">
+    <section className="relative bg-white overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-10 pb-8 sm:pt-14 sm:pb-10 lg:pt-20 lg:pb-16">
       <FloatingMedicalIcons />
       <div className={`absolute top-1/2 right-0 w-[600px] h-[600px] rounded-full blur-[150px] opacity-10 -translate-y-1/2 ${active === "emergency" ? "bg-red-500" : "bg-emerald-400"}`} />
       <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
-      <div className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 pt-0 sm:pt-0 lg:pt-0 mt-0 relative z-10">
+      <div className="w-full max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 items-start">
           {/* Left Content */}
           <div className="lg:col-span-5 flex flex-col justify-center h-full min-h-[320px] sm:min-h-[400px] md:min-h-[480px] lg:min-h-[540px] pt-0 sm:pt-0 md:pt-0 lg:pt-0 mt-0">

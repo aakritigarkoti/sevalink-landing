@@ -10,12 +10,11 @@ const eslintConfig = defineConfig([
       "react/no-unescaped-entities": "off",
       "react-hooks/set-state-in-effect": "off",
       "react-hooks/static-components": "off",
-      "@typescript-eslint/no-explicit-any": "off",
+      // Restored to "warn" — legitimate any usages in map.tsx are suppressed inline
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
-  // Override default ignores of eslint-config-next.
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",
