@@ -40,8 +40,8 @@ export default function ContactPage() {
             <div className="space-y-5 text-gray-700">
               <p>
                 <span className="font-semibold text-gray-900">Email:</span>{" "}
-                <a href="mailto:support@sevalink.com" className="text-red-600 hover:text-red-700 transition-colors underline-offset-2 hover:underline">
-                  support@sevalink.com
+                <a href="mailto:support@sevalinkcare.com" className="text-red-600 hover:text-red-700 transition-colors underline-offset-2 hover:underline">
+                  support@sevalinkcare.com
                 </a>
               </p>
               {SEVALINK_PHONE_DISPLAY !== "" && (
