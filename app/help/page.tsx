@@ -14,7 +14,7 @@ const faqs: { section: string; items: { q: string; a: string }[] }[] = [
     items: [
       {
         q: "How do I book an ambulance on SevaLink?",
-        a: "Open the SevaLink app, tap 'Book Ambulance', select the ambulance type (BLS, ALS, ICU on Wheels, Neonatal, or Patient Transport), share your location, and confirm. You will receive a booking confirmation with the crew details and ETA.",
+        a: "Open the SevaLink app and tap 'Book Ambulance'. Share your location, then select your emergency type (cardiac, accident, respiratory, etc.). You do not choose the ambulance type — a SevaLink expert matches the right ambulance for your emergency in real time. Nearby hospitals are also suggested based on your situation's criticality. You will receive a confirmation with the assigned crew and ETA.",
       },
       {
         q: "How quickly will an ambulance arrive?",

@@ -10,11 +10,11 @@ const faqs = [
   },
   {
     q: "How quickly can I book an ambulance?",
-    a: "You can book an ambulance in just a few clicks through the SevaLink app. Once confirmed, the nearest available ambulance is assigned instantly to reach you as quickly as possible.",
+    a: "Share your location, select your emergency type (cardiac, accident, respiratory, etc.), and a SevaLink expert matches the right ambulance for your situation in real time. Nearby hospitals are suggested based on emergency criticality. The matched ambulance is dispatched and tracked live.",
   },
   {
     q: "What services does SevaLink provide?",
-    a: "SevaLink offers ambulance booking (BLS, ALS, ICU on Wheels, Neonatal, and Patient Transport), homecare services (doctor at home, nurse at home, and lab tests at home), and hospital appointment booking.",
+    a: "SevaLink offers expert-matched ambulance dispatch (you describe your emergency, and a real-time expert assigns the right ambulance type), homecare services (nursing, physiotherapy, and attendant care at home), and hospital appointment booking.",
   },
   {
     q: "Are the service providers verified?",

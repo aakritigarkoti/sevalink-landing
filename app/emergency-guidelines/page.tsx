@@ -37,8 +37,15 @@ export default function EmergencyGuidelinesPage() {
               <strong>Call 112 first</strong> if the situation is immediately life-threatening — do not wait.
             </li>
             <li>
-              <strong>Open the SevaLink app</strong> and tap "Book Ambulance". Select the type you need
-              (BLS, ALS, ICU on Wheels, Neonatal, or Patient Transport).
+              <strong>Open the SevaLink app</strong> and tap "Book Ambulance". Select your{" "}
+              <strong>emergency type</strong> (e.g. cardiac, accident, respiratory, fall) —
+              you do not need to choose the ambulance type. A SevaLink expert will recommend
+              the right ambulance (BLS, ALS, ICU on Wheels, Neonatal, etc.) for your situation
+              in real time.
+            </li>
+            <li>
+              <strong>Nearby hospitals are suggested</strong> based on your emergency criticality
+              and location. The system surfaces the most appropriate facility for your case.
             </li>
             <li>
               <strong>Share your exact location</strong> — use the GPS pin or type the address with a nearby

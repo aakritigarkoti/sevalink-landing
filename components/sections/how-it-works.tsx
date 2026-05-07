@@ -2,13 +2,13 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { MapPin, Activity, Users, CheckCircle, Ambulance } from "lucide-react";
+import { MapPin, Activity, Building2, CheckCircle, Ambulance } from "lucide-react";
 
 const steps = [
-  { id: "01", icon: MapPin, title: "Enter your location", description: "Open SevaLink app and share your location with one click." },
-  { id: "02", icon: Activity, title: "Choose service", description: "Select between ambulance or homecare based on your need." },
-  { id: "03", icon: Users, title: "Select provider", description: "Choose from verified paramedics, nurses, or doctors nearby." },
-  { id: "04", icon: CheckCircle, title: "Confirm & get help", description: "Confirm booking and help arrives at your door immediately." },
+  { id: "01", icon: MapPin, title: "Share your location", description: "Open SevaLink and share your live location with one tap." },
+  { id: "02", icon: Activity, title: "Select emergency type", description: "Describe your emergency — cardiac, accident, respiratory, or other. You do not pick the ambulance." },
+  { id: "03", icon: Building2, title: "Hospital & ambulance matched", description: "Nearby hospitals are suggested based on criticality. A SevaLink expert recommends the right ambulance type in real time." },
+  { id: "04", icon: CheckCircle, title: "Help is on the way", description: "The matched ambulance is dispatched and tracked live to your exact location." },
 ];
 
 const EASE = "easeOut";
